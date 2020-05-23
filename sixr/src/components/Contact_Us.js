@@ -33,8 +33,6 @@ const Contact_Us = (props) => {
     });
   };
 
-  // console.log("%c Contact Us Form", "color:yellow", form)
-
   return (
     <>
       {props.isSubmitted ? (

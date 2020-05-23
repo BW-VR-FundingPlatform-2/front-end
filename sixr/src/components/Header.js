@@ -62,7 +62,7 @@ function Header() {
   return (
     <>
       <ElevationScroll>
-        <AppBar position="sticky" color="#fff" >
+        <AppBar position="sticky" color="default" >
           <Toolbar>
               <img className={header_Styles.sixr_logo} src={sixr_logo} alt="Site sixr_logo" />
               <Tabs

@@ -6,8 +6,8 @@ const blue = "#33C6F4"
 export default createMuiTheme({
     palette : {
         common: {
-            pink : `${pink}`,
-            blue:`${blue}`
+            black: "#000",
+            white:"#fff"
         },
         primary: {
             main:`${pink}`,
