@@ -9,6 +9,8 @@ import {
 } from "@material-ui/core";
 import laurenChil from "../assets/Lauren_chil.svg";
 import { makeStyles } from "@material-ui/styles";
+//components
+import DashboardForm from './DashboardForm'
 
 const useStyles = makeStyles((theme) => ({
   mainImage: {
@@ -93,6 +95,7 @@ const Dashboard = () => {
             </Button>
           </Grid>
       </Grid>
+      <DashboardForm />
     </>
   );
 };
