@@ -52,6 +52,8 @@ function Header() {
       setValue(3);
     } else if (window.location.pathname === "/login" && value !== 4) {
       setValue(4);
+    } else if (window.location.pathname === "/dashboard" && value !== 5) {
+      setValue(5);
     }
   }, [value]);
 
@@ -103,6 +105,14 @@ function Header() {
                 label="Log In"
                 component={Link}
                 to="/login"
+                disableRipple
+              />
+              {/* This Is a Test Tab for Dashboard.  Will Be removed, and put on a private route */}
+              <Tab
+                className={header_Styles.tab}
+                label="Dashboard"
+                component={Link}
+                to="/dashboard"
                 disableRipple
               />
             </Tabs>
