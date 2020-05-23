@@ -1,6 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
-const pink = "#3D405B"
+const pink = "#ED1A74"
 const blue = "#33C6F4"
 
 export default createMuiTheme({
@@ -12,7 +12,7 @@ export default createMuiTheme({
         primary: {
             main:`${pink}`,
         },
-        secondaryL: {
+        secondary: {
             main:`${blue}`,
         }
         

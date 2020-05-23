@@ -9,11 +9,13 @@ import createCampange from './components/CreateCampaign'
 import BrowseProjects from './components/BrowseProjects';
 import AboutUs from './components/AboutUs';
 import { LogIn } from './components/LogIn';
+import Dashboard from './components/Dashboard'
 
 function App() {
   return (
     <div>
       <Header />
+      <Dashboard />
       <Route exact path="/" component={HomePage} />
       <Route exact path="/createcampange" component={createCampange} />
       <Route exact path="/browseprojects" component={BrowseProjects} />
