@@ -37,7 +37,7 @@ const DashboardForm = () => {
           Create Your Rewards
         </Typography>
         <form>
-          <Paper style={{ padding: "15px" }}>
+          <Paper style={{ padding: "15px", width:"80%", margin:"auto"}}>
             <Grid container alignItems="flex-start" spacing={3}>
               <Grid item xs={4}>
                 <TextField
@@ -83,13 +83,13 @@ const DashboardForm = () => {
                   type="text area"
                   label="Project Description"
                   variant="outlined"
-                  rows={4}
+                  rows={12}
                   multiline
                   onChange={handleChange}
                   value={formData.description}
                 />
               </Grid>
-              <Grid item style={{ marginTop: 16 }}>
+              <Grid item style={{ marginTop: 8 }}>
                 <Button
                   variant="contained"
                   color="secondary"
