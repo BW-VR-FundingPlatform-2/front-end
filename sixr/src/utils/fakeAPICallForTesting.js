@@ -1,7 +1,7 @@
-export async function fakeAPICallForTesting({ username, password }) {
+export async function fakeAPICallForTesting({ email, password }) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (username === "ariels713@gmail.com" && password === "password") {
+        if (email === "ariels713@gmail.com" && password === "password") {
           resolve();
         } else {
           reject();
