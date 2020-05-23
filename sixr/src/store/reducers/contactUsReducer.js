@@ -1,4 +1,7 @@
 const intialState = {
+    name:"",
+    email:"",
+    userQuestion:"",
     isSubmitted:false,
 }
 

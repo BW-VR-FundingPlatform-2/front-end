@@ -13,7 +13,9 @@ import { contactUsAction } from "../store/actions/contactUsAction";
 
 const Contact_Us = (props) => {
   const [formData, setFormData] = useState({
-    loading: false,
+    name:"",
+    email:"",
+    userQuestion: "",
   });
 
   const handleSubmit = (event) => {
@@ -31,13 +33,15 @@ const Contact_Us = (props) => {
     });
   };
 
+  // console.log("%c Contact Us Form", "color:yellow", form)
+
   return (
     <>
       {props.isSubmitted ? (
         <>
             <Typography
               variant="h4"
-              color="secondary"
+              color="primary"
               style={{ textAlign: "center", margin: "2em auto" }}
             >
               We'll Reach out soon!
@@ -53,11 +57,11 @@ const Contact_Us = (props) => {
               variant="h4"
               align="center"
               gutterBottom
-              color="secondary"
+              color="primary"
             >
               Contact Us
             </Typography>
-            <form>
+            <form onSubmit={handleSubmit}>
               <Paper style={{ padding: "15px" }}>
                 <Grid container alignItems="flex-start" spacing={2}>
                   <Grid item xs={6}>
@@ -98,10 +102,10 @@ const Contact_Us = (props) => {
                   <Grid item style={{ marginTop: 16 }}>
                     <Button
                       variant="contained"
-                      color="secondary"
+                      color="primary"
                       type="submit"
                       style={{ width: "570px" }}
-                      onClick={handleSubmit}
+
                     >
                       Submit
                     </Button>
