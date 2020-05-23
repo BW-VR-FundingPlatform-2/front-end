@@ -27,14 +27,14 @@ function ElevationScroll(props) {
 
 const useStyles = makeStyles((theme) => ({
   header_Margin: {
-    // ...theme.mixins.Toolbar,
-    // marginBottom: "3em",
-    // [theme.breakpoints.down("ms")] : {
-    //     marginBottom: "2em"
-    // },
-    // [theme.breakpoints.down("xs")] : {
-    //     marginBottom: "1.25em"
-    // },
+    ...theme.mixins.Toolbar,
+     marginBottom: "3em",
+    [theme.breakpoints.down("ms")] : {
+        marginBottom: "2em"
+    },
+     [theme.breakpoints.down("xs")] : {
+        marginBottom: "1.25em"
+    },
   },
   sixr_logo: {
     padding: "30px",
@@ -58,11 +58,11 @@ function Header() {
   useEffect(() => {
     if (window.location.pathname === "/" && value !== 0) {
       setValue(0);
-    } else if (window.location.pathname === "/portfolio" && value !== 1) {
+    } else if (window.location.pathname === "/browseprojects" && value !== 1) {
       setValue(1);
     } else if (window.location.pathname === "/about" && value !== 2) {
       setValue(2);
-    } else if (window.location.pathname === "/contact" && value !== 3) {
+    } else if (window.location.pathname === "/login" && value !== 3) {
       setValue(3);
     }
   }, [value]);
@@ -80,7 +80,7 @@ function Header() {
                 className={header_Styles.tab}
                 label="Create A Campaign"
                 component={Link}
-                to="/createcapaign"
+                to="/createcampaign"
                 disableRipple
               />
               <Tab

@@ -12,7 +12,7 @@ export default createMuiTheme({
         primary: {
             main:`${pink}`,
         },
-        secondaryL: {
+        secondary: {
             main:`${blue}`,
         }
         
