@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+//connect from Redux
+import { connect } from "react-redux";
 import {
-  Card,
-  CardContent,
   Grid,
   Button,
   Typography,
-  Paper,
 } from "@material-ui/core";
 import laurenChil from "../assets/Lauren_chil.svg";
 import { makeStyles } from "@material-ui/styles";
 //components
 import DashboardForm from './DashboardForm'
+
+
 
 const useStyles = makeStyles((theme) => ({
   mainImage: {
@@ -43,8 +44,27 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const Dashboard = () => {
+
+
+const Dashboard = (props) => {
+  const [counter, setCounter ] = useState({
+    count:0
+  })
   const classes = useStyles();
+
+
+  useEffect(() => {
+    const count = setInterval(() => {
+      setCounter(preveState => {
+        return {
+          ...preveState,
+          count: count + 123
+        }
+      })
+    }, 1000);
+    return () => clearInterval(count)
+  })
+
   return (
     <>
       <Grid
@@ -53,17 +73,17 @@ const Dashboard = () => {
       >
         <Grid item xs={4}>
           <Typography variant="h6" color="secondary">
-            Raised: <span style={{ color: "black" }}>(data from backend)</span>{" "}
+  Raised: <span style={{ color: "black" }}>${counter.count}</span>{" "}
           </Typography>
         </Grid>
         <Grid item xs={4}>
           <Typography variant="h6" color="secondary">
-            Raised: <span style={{ color: "black" }}>(data from backend)</span>{" "}
+  Project Type: <span style={{ color: "black" }}>{props.projectType.toUpperCase()}</span>{" "}
           </Typography>
         </Grid>
         <Grid item xs={4}>
           <Typography variant="h6" color="secondary">
-            Raised: <span style={{ color: "black" }}>(data from backend)</span>{" "}
+  Funding Goal: <span style={{ color: "black" }}>${props.fundingGoal}</span>{" "}
           </Typography>
         </Grid>
       </Grid>
@@ -100,4 +120,14 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+  return {
+    name: state.campaignFormReducer.name,
+    email: state.campaignFormReducer.email,
+    description: state.campaignFormReducer.description,
+    projectType: state.campaignFormReducer.projectType,
+    fundingGoal: state.campaignFormReducer.fundingGoal,
+  }
+}
+
+export default connect(mapStateToProps, {})(Dashboard);
