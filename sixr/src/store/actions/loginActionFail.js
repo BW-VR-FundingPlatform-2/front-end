@@ -1,5 +1,4 @@
 const LOGIN_FAIL = "LOGIN_FAIL"
-const FORM_SUBMITTED = "FORM_SUBMITTED"
 
 const loginActionFail = dispatch => {
     return (dispatch) => {

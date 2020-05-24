@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+// For connecting store to compotnent for redux
 import { connect } from "react-redux";
+import campaignFormAction from "../store/actions/campaignFormAction";
 import {
   Typography,
   Paper,
@@ -8,9 +10,15 @@ import {
   Grid,
   Button,
   MenuItem,
+  InputAdornment,
+  OutlinedInput,
+  FormControl,
+  InputLabel,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import headerImage from "../assets/campaint_main_image.svg";
+//Select form values
+import { projectTypes } from "../utils/selectFormValues";
 //import the action
 //make a reducer for the create campaign page
 
@@ -25,34 +33,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const projectTypes = [
-  {
-    value: "arts",
-    label: "Arts",
-  },
-  {
-    value: "design",
-    label: "Design",
-  },
-  {
-    value: "tech",
-    label: "Tech",
-  },
-  {
-    value: "food",
-    label: "Food",
-  },
-  {
-    value: "games",
-    label: "Games",
-  },
-  {
-    value: "music",
-    label: "Music",
-  },
-];
+const CreateCampaign = (props) => {
+  const [formValues, setFormValues] = useState({
+    name: "",
+    email: "",
+    description: "",
+    projectType: "",
+    fundingGoal: "",
+  });
 
-const CreateCampaign = () => {
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormValues((prevState) => {
+      return {
+        ...prevState,
+        [name]: value,
+      };
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    props.campaignFormAction(formValues);
+  };
+
+  console.log("FORM VALUES FROM ACTION", formValues);
+
   const classes = useStyles();
   return (
     <>
@@ -70,7 +76,7 @@ const CreateCampaign = () => {
         <Typography variant="h4" align="center" gutterBottom color="secondary">
           Create Your Campaign
         </Typography>
-        <form>
+        <form onSubmit={handleSubmit}>
           <Paper style={{ padding: "15px" }}>
             <Grid container alignItems="flex-start" spacing={2}>
               <Grid item xs={6}>
@@ -79,8 +85,10 @@ const CreateCampaign = () => {
                   required
                   name="name"
                   type="text"
-                  label="First Name"
+                  label="Name"
                   variant="outlined"
+                  onChange={handleChange}
+                  value={formValues.name}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -91,6 +99,8 @@ const CreateCampaign = () => {
                   type="text"
                   label="Email"
                   variant="outlined"
+                  onChange={handleChange}
+                  value={formValues.email}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -103,6 +113,8 @@ const CreateCampaign = () => {
                   variant="outlined"
                   rows={4}
                   multiline
+                  onChange={handleChange}
+                  value={formValues.description}
                 />
               </Grid>
 
@@ -116,6 +128,8 @@ const CreateCampaign = () => {
                   label="Select"
                   helperText="Please select your Project Type"
                   variant="outlined"
+                  onChange={handleChange}
+                  value={formValues.projectType}
                 >
                   {projectTypes.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
@@ -125,14 +139,21 @@ const CreateCampaign = () => {
                 </TextField>
               </Grid>
               <Grid item xs={6}>
-                <TextField
-                  fullWidth
-                  required
-                  name="funding"
-                  type="text"
-                  label="Funding Goal"
-                  variant="outlined"
-                />
+                <FormControl fullWidth variant="outlined">
+                  <InputLabel htmlFor="outlined-adornment-amount">
+                    Amount
+                  </InputLabel>
+                  <OutlinedInput
+                    name="fundingGoal"
+                    id="outlined-adornment-amount"
+                    value={formValues.fundingGoal}
+                    onChange={handleChange}
+                    startAdornment={
+                      <InputAdornment position="start">$</InputAdornment>
+                    }
+                    labelWidth={60}
+                  />
+                </FormControl>
               </Grid>
               <Grid item style={{ marginTop: 16 }}>
                 <Button
@@ -155,4 +176,4 @@ const CreateCampaign = () => {
 const mapStateToProps = (state) => {
   return {};
 };
-export default connect()(CreateCampaign);
+export default connect(mapStateToProps, { campaignFormAction })(CreateCampaign);

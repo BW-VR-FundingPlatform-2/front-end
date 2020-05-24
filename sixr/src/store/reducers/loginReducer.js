@@ -9,7 +9,7 @@ const initialtstate = {
   
   const loginReducer = (state = initialtstate, action) => {
     switch (action.type) {
-      case "FORM_SUBMITTED" :
+      case "LOG_IN_FORM_SUBMITTED" :
         return {
           ...state,
           isLoading:true,

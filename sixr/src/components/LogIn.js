@@ -21,7 +21,7 @@ import mainImage from "../assets/login_main_image.svg";
 //Actions 
 import loginAction from "../store/actions/loginAction";
 import loginActionFail from '../store/actions/loginActionFail'
-import loginSucess from '../store/actions/loginSucess'
+import loginSucessAction from '../store/actions/loginSucessAction'
 import {fakeAPICallForTesting} from "../utils/fakeAPICallForTesting";
 
 //styling for Image with Material UI
@@ -68,7 +68,7 @@ const LogIn = (props) => {
     try {
       await fakeAPICallForTesting({email, password})
       props.loginAction(formValues);
-      props.loginSucess()
+      props.loginSucessAction()
       history.push("/dashboard")
     } catch (error) {
       props.loginActionFail()
@@ -186,7 +186,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { loginAction, loginActionFail, loginSucess })(LogIn);
+export default connect(mapStateToProps, { loginAction, loginActionFail, loginSucessAction })(LogIn);
 
 // component={Link}
 // to="createcampange"

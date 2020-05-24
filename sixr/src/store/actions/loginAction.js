@@ -1,10 +1,10 @@
 
-const FORM_SUBMITTED = "FORM_SUBMITTED"
+const LOG_IN_FORM_SUBMITTED = "LOG_IN_FORM_SUBMITTED"
 
 const loginAction  = formValues => {
     return (dispatch) => {
-        dispatch({type:FORM_SUBMITTED})
+        dispatch({type:LOG_IN_FORM_SUBMITTED})
     }
 }
 
-export default loginAction
+export default loginAction 
