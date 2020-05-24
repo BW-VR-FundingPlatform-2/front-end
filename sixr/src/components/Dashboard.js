@@ -72,7 +72,7 @@ const Dashboard = () => {
           item
           xs={4}
           container
-          alignItems="center"
+          alignitems="center"
           justify="center"
           style={{ height: "30em" }}
         >
@@ -89,7 +89,7 @@ const Dashboard = () => {
               color="secondary"
               type="submit"
               className={classes.buttonStyle}
-              alignItems="flex-end"
+              alignitems="flex-end"
             >
               edit
             </Button>

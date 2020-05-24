@@ -78,7 +78,7 @@ const CreateCampaign = (props) => {
       <Grid item style={{ margin: "auto" }}>
       <Grid
         container
-        alignItems="center"
+        alignitems="center"
         justify="center"
         style={{ height: "30em" }}
       >
@@ -91,7 +91,7 @@ const CreateCampaign = (props) => {
       </Typography>
       <form onSubmit={handleSubmit}>
         <Paper style={{ padding: "15px" }}>
-          <Grid container alignItems="flex-start" spacing={2}>
+          <Grid container alignitems="flex-start" spacing={2}>
             <Grid item xs={6}>
               <TextField
                 fullWidth

@@ -83,7 +83,7 @@ const BrowseProjects = () => {
       <Grid item style={{ margin: "0 auto 3em" }}>
         <Grid
           container
-          alignItems="center"
+          alignitems="center"
           justify="center"
           style={{ height: "30em" }}
         >
@@ -346,7 +346,7 @@ const BrowseProjects = () => {
       <Grid item style={{ margin: "3em auto 0" }}>
         <Grid
           container
-          alignItems="center"
+          alignitems="center"
           justify="center"
           style={{ height: "30em" }}
         >

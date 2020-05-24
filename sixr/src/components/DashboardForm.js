@@ -29,7 +29,6 @@ const DashboardForm = () => {
             }
         })
     }
-    console.log("formData", formData)
   return (
     <>
       <div style={{ padding: "15px", margin: "3em auto", maxWidth: "90%" }}>

@@ -63,7 +63,7 @@ const AboutUs = () => {
       <Grid item>
         <Grid
           container
-          alignItems="center"
+          alignitems="center"
           justify="center"
           style={{ height: "30em"}}
         >
@@ -104,7 +104,7 @@ const AboutUs = () => {
       <Grid item>
         <Grid
           container
-          alignItems="center"
+          alignitems="center"
           justify="center"
           style={{ height: "30em", marginLeft: "3em" }}
         >
@@ -151,7 +151,7 @@ const AboutUs = () => {
       <Grid item>
         <Grid
           container
-          alignItems="center"
+          alignitems="center"
           justify="center"
           style={{ height: "30em"}}
         >
@@ -189,7 +189,7 @@ const AboutUs = () => {
       <Grid item>
         <Grid
           container
-          alignItems="center"
+          alignitems="center"
           justify="center"
           style={{ height: "30em", marginLeft: "3em" }}
         >
