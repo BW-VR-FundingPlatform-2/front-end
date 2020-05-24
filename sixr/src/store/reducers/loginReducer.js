@@ -26,7 +26,10 @@ const initialtstate = {
         return {
           ...state,
           isLoading:false,
-          success:true
+          success:true,
+          email:"",
+          password:"",
+          // error:false,
         }
       default:
         return state;

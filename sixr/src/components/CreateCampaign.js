@@ -19,6 +19,8 @@ import {
   InputLabel,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+// components
+import {LogIn_CampaignSuccess} from './LogIn_CampaignSuccess'
 import headerImage from "../assets/campaint_main_image.svg";
 //Select form values
 import { projectTypes } from "../utils/selectFormValues";
@@ -68,23 +70,7 @@ const CreateCampaign = (props) => {
       {props.formSubmitted 
       ?        
       <>
-      <Typography
-        variant="h4"
-        color="primary"
-        style={{ textAlign: "center", margin: "4em auto" }}
-      >
-        Head Over to your
-        <Typography>
-        <Link
-          color="secondary"
-          component="button"
-          variant="h4"
-          onClick={() => {
-            history.push("/dashboard")
-          }}
-        > DashBaord!</Link> 
-        </Typography>
-      </Typography>
+      < LogIn_CampaignSuccess />
 
   </>
       :

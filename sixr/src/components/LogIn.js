@@ -18,6 +18,9 @@ import {
 import { makeStyles } from "@material-ui/styles";
 import mainImage from "../assets/login_main_image.svg";
 
+//components
+import { LogIn_CampaignSuccess } from './LogIn_CampaignSuccess'
+
 //Actions 
 import loginAction from "../store/actions/loginAction";
 import loginActionFail from '../store/actions/loginActionFail'
@@ -80,8 +83,7 @@ const LogIn = (props) => {
   //This is the login form made with Material UI
   return (
     <>
-
-      <Grid item style={{ margin: "auto" }}>
+    <Grid item style={{ margin: "auto" }}>
         <Grid
           container
           alignItems="center"
@@ -92,6 +94,12 @@ const LogIn = (props) => {
           <div className={classes.mainImage} />
         </Grid>
       </Grid>
+      {
+        props.success 
+        ? <>      
+        <LogIn_CampaignSuccess />
+      </>
+        :
       <div style={{ padding: "15px", margin: "3em auto", maxWidth: "400px" }}>
         {/* This is the form  */}
         <form onSubmit={handleSubmit}>
@@ -173,6 +181,8 @@ const LogIn = (props) => {
           </Paper>
         </form>
       </div>
+      }
+      
     </>
   );
 };
