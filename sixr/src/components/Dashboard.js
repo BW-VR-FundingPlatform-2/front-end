@@ -1,54 +1,21 @@
 import React, { useState, useEffect } from "react";
 //connect from Redux
 import { connect } from "react-redux";
+//Actions for redux
+import dashboardTitleAction from '../store/actions/dashboardTitleAction'
 import { Grid, Button, Typography, TextField, Paper } from "@material-ui/core";
-import laurenChil from "../assets/Lauren_chil.svg";
-import { makeStyles } from "@material-ui/styles";
+// import { makeStyles } from "@material-ui/styles";
 //components
 import DashboardForm from "./DashboardForm";
-
-const useStyles = makeStyles((theme) => ({
-  mainImage: {
-    backgroundImage: `url(${laurenChil})`,
-    backgroundPosition: "center",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    height: "100%",
-    width: "100%",
-  },
-  headerContent: {
-    color: "black",
-    fontSize: "2em",
-    fontWeight: "bold",
-  },
-  fundingGoal: {
-    color: "#FEBF12",
-    fontSize: "1em",
-    fontWeight: "bold",
-  },
-  description: {
-    width: "90%",
-    margin: "1em auto 3em 1em",
-  },
-  buttonStyle: {
-    marginLeft: "1em",
-    width: "100px",
-    color: "white",
-  },
-}));
+//Material UI styles
+import { useStyles } from '../theme/componentStyles.js/dashboardStyles'
 
 const Dashboard = (props) => {
+  // a counter that will be updated every second
   const [counter, setCounter] = useState({
     count: 0,
   });
-  const [imageLoader, setImageLoader] = useState(false);
-  const [projectTitleForm, setProjectTitleForm] = useState({
-    title: "",
-    editTitle: false,
-  });
-
-  const classes = useStyles();
-
+  //this useEffect will increase the money raised in the component by 1
   useEffect(() => {
     const count = setInterval(() => {
       setCounter((preveState) => {
@@ -61,8 +28,38 @@ const Dashboard = (props) => {
     return () => clearInterval(count);
   });
 
+  // this will cause the image to "upload" when the add photo button is clicked
+  const [imageLoader, setImageLoader] = useState(false);
+
+  // this will update the title when the Submit Title button is click, after it it clicked the title will now render, and an edit button will render.  Clicking the edit button will let you edit the title.
+  const [projectTitleForm, setProjectTitleForm] = useState({
+    title: "",
+    editTitle: false,
+  });
+
+  // this const is where are styles are set. 
+  const classes = useStyles();
+
+  // this hanldechange will update the form will update only the title input.
+  const handleProjectTitleChange = (event) => {
+    const { name, value } = event.target
+    setProjectTitleForm(prevState => {
+      return {
+        ...prevState,
+        [name] : value
+      }
+    })
+  }
+
+  // this handleTitleSubmit will pass the values to our dashboardTitleAction, which will update state through the redux store. 
+  const dashboardTitleAction = (event) => {
+    event.preventDefault()
+    props.dashboardTitleAction(projectTitleForm)
+  }
+
   return (
     <>
+    {/* Here we are updating the top part of the component.  Raided: ProjectType: Funding Goal.  All this information is coming from the CampaignFormReducer.  There is also logic here that updates the Photo.  When Clicked a picture will update.  All the styles and photos are coming from theme/dashboard styles */}
       <Grid
         container
         style={{ width: "90%", padding: "1em", textAlign: "center" }}
@@ -76,7 +73,7 @@ const Dashboard = (props) => {
           <Typography variant="h6" color="secondary">
             Project Type:{" "}
             <span style={{ color: "black" }}>
-              {props.projectType.toUpperCase()}
+              {props.projectType}
             </span>{" "}
           </Typography>
         </Grid>
@@ -111,9 +108,12 @@ const Dashboard = (props) => {
               Add Photo
             </Button>
           )}
+          {/* End of Raised: ProjectType: FundingGoal portion of page */}
+
+        {/* This logic updated the Project Title from Redux */}
         </Grid>
         <Grid item xs={8}>
-          {projectTitleForm.editTitle ? null : (
+          {projectTitleForm.editTitle ? false : (
             <>
               <form>
                 <Grid container alignitems="flex-start" spacing={2}>
@@ -126,7 +126,8 @@ const Dashboard = (props) => {
                       label="Project Title"
                       variant="outlined"
                       style={{ marginLeft: "1em" }}
-                      // onChange={handleChange}
+                      onChange={handleProjectTitleChange}
+                      // value={}
                     />
                   </Grid>
                 </Grid>
@@ -144,6 +145,7 @@ const Dashboard = (props) => {
               </Button>
             </>
           )}
+          {/*  */}
 
           {projectTitleForm.editTitle
             ? null
@@ -161,7 +163,7 @@ const Dashboard = (props) => {
             className={classes.fundingGoal}
           >
             Funding Goal:{" "}
-            <span style={{ color: "black" }}>{props.fundingGoal}</span>
+            <span style={{ color: "black" }}>${props.fundingGoal}</span>
           </Typography>
           <Typography className={classes.description}>
             Description is simply dummy text of the printing and typesetting
@@ -205,12 +207,11 @@ const Dashboard = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    name: state.campaignFormReducer.name,
-    email: state.campaignFormReducer.email,
-    description: state.campaignFormReducer.description,
     projectType: state.campaignFormReducer.projectType,
     fundingGoal: state.campaignFormReducer.fundingGoal,
+    title: state.dashboardProjectTitleReducer.title,
+    isSubmitted: state.dashboardProjectTitleReducer.isSubmitted,
   };
 };
 
-export default connect(mapStateToProps, {})(Dashboard);
+export default connect(mapStateToProps, {dashboardTitleAction})(Dashboard);

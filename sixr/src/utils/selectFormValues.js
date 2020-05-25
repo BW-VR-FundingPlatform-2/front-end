@@ -1,26 +1,26 @@
 export const projectTypes = [
     {
-      value: "arts",
+      value: "Arts",
       label: "Arts",
     },
     {
-      value: "design",
+      value: "Design",
       label: "Design",
     },
     {
-      value: "tech",
+      value: "Tech",
       label: "Tech",
     },
     {
-      value: "food",
+      value: "Food",
       label: "Food",
     },
     {
-      value: "games",
+      value: "Games",
       label: "Games",
     },
     {
-      value: "music",
+      value: "Music",
       label: "Music",
     },
   ];
