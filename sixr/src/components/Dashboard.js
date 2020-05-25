@@ -15,18 +15,11 @@ const Dashboard = (props) => {
   const [counter, setCounter] = useState({
     count: 0,
   });
-  //this useEffect will increase the money raised in the component by 1
+  //this will give us a random number, and it will be displayed as the amount of money raised for the project.
   useEffect(() => {
-    const count = setInterval(() => {
-      setCounter((preveState) => {
-        return {
-          ...preveState,
-          count: count + 123,
-        };
-      });
-    }, 1000);
-    return () => clearInterval(count);
-  });
+    const randomNumber = Math.floor(Math.random() * 100000) + 1
+    setCounter({count:randomNumber})
+  },[])
 
   // this will cause the image to "upload" when the add photo button is clicked
   const [imageLoader, setImageLoader] = useState(false);
@@ -34,9 +27,9 @@ const Dashboard = (props) => {
   // this will update the title when the Submit Title button is click, after it it clicked the title will now render, and an edit button will render.  Clicking the edit button will let you edit the title.
   const [projectTitleForm, setProjectTitleForm] = useState({
     title: "",
-    editTitle: false,
+    isSubmitted: false,
   });
-
+  
   // this const is where are styles are set. 
   const classes = useStyles();
 
@@ -110,12 +103,13 @@ const Dashboard = (props) => {
           )}
           {/* End of Raised: ProjectType: FundingGoal portion of page */}
 
-        {/* This logic updated the Project Title from Redux */}
+        {/* This logic updated the Project Title from Redux.  Submitting send the information to dashboardTitleActioin and will update the redux store */}
         </Grid>
         <Grid item xs={8}>
-          {projectTitleForm.editTitle ? false : (
+          {projectTitleForm.isSubmitted ? false : (
             <>
-              <form>
+              {/* When  we submit the title form, it will call dashboardTitleAction, and the redux store will update it's state */}
+              <form onSubmit={dashboardTitleAction}>
                 <Grid container alignitems="flex-start" spacing={2}>
                   <Grid item xs={5}>
                     <TextField
@@ -127,11 +121,10 @@ const Dashboard = (props) => {
                       variant="outlined"
                       style={{ marginLeft: "1em" }}
                       onChange={handleProjectTitleChange}
-                      // value={}
+                      value={projectTitleForm.title}
                     />
                   </Grid>
                 </Grid>
-              </form>
               <Button
                 variant="contained"
                 color="secondary"
@@ -139,22 +132,23 @@ const Dashboard = (props) => {
                 className={classes.buttonStyle}
                 alignitems="flex-end"
                 style={{ marginTop: "1em", height: "35px", width: "150px" }}
-                onClick={() => setImageLoader(true)}
-              >
+                // onClick={() => setImageLoader(true)}
+                >
                 Submit Title
               </Button>
+                </form>
             </>
           )}
-          {/*  */}
+          {/* End of Logic for Submitting our form.  Once Submitted the Title will now display */}
 
-          {projectTitleForm.editTitle
-            ? null
+          {projectTitleForm.isSubmitted
+            ? false
             : 
               <Typography
                 style={{ marginLeft: ".5em", marginBottom:"1em" }}
                 className={classes.headerContent}
               >
-                {projectTitleForm.title}
+                {props.title}
               </Typography>
           }
 
@@ -185,7 +179,7 @@ const Dashboard = (props) => {
             galley of type and scrambled it to make a type specimen book. It has
             survived not only five centuries.
           </Typography>
-          {!projectTitleForm.editTitle ? null : (
+          {!projectTitleForm.isSubmitted ? null : (
             <Button
               variant="contained"
               color="secondary"

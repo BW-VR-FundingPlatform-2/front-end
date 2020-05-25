@@ -8,7 +8,7 @@ const dashboardProjectTitleReducer = (state = initialState, action ) => {
         case "SUBMIT_TITLE_SUCCESS" :
             return {
                 ...state,
-                title:action.payload.formValues.title,
+                title:action.payload.title,
                 isSubmitted:true
             }
         default:
