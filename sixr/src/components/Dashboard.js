@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 //Actions for redux
 import dashboardTitleAction from '../store/actions/dashboardTitleAction'
+import campaignFormTitleEditAction from '../store/actions/campaginFormTitleEditAction'
 import { Grid, Button, Typography, TextField, Paper } from "@material-ui/core";
 // import { makeStyles } from "@material-ui/styles";
 //components
@@ -162,24 +163,7 @@ const Dashboard = (props) => {
           </Typography>
           {/* This will display project description, this comes from the create campaign form. */}
           <Typography className={classes.description}>
-            Description is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries. Description is simply dummy text of the
-            printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, when an unknown
-            printer took a galley of type and scrambled it to make a type
-            specimen book. It has survived not only five centuries. Description
-            is simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industry's standard dummy text ever since the
-            1500s, when an unknown printer took a galley of type and scrambled
-            it to make a type specimen book. It has survived not only five
-            centuries. Description is simply dummy text of the printing and
-            typesetting industry. Lorem Ipsum has been the industry's standard
-            dummy text ever since the 1500s, when an unknown printer took a
-            galley of type and scrambled it to make a type specimen book. It has
-            survived not only five centuries.
+            {props.description}
           </Typography>
 
 
@@ -193,7 +177,15 @@ const Dashboard = (props) => {
               className={classes.buttonStyle}
               alignitems="flex-end"
               style={{ marginTop: "1em", height: "35px", width: "120px"}}
-              // onClick={() => setImageLoader(true)}
+              // onClick={() => {
+              //   // props.isSubmitted &&
+              //   props.dashboardTitleAction(() => {
+              //     const SUBMIT_TITLE_EDIT = "SUBMIT_TITLE_EDIT"
+              //     return (dispatch) => {
+              //       dispatch({type:SUBMIT_TITLE_EDIT})
+              //     }
+              //   })
+              // }}
             >
               Edit
             </Button>
@@ -209,10 +201,12 @@ const mapStateToProps = (state) => {
   return {
     projectType: state.campaignFormReducer.projectType,
     fundingGoal: state.campaignFormReducer.fundingGoal,
+    description: state.campaignFormReducer.description,
     title: state.dashboardProjectTitleReducer.title,
     isSubmitted: state.dashboardProjectTitleReducer.isSubmitted,
-    displayForm: state.dashboardProjectTitleReducer.displayForm
+    displayForm: state.dashboardProjectTitleReducer.displayForm,
+    editTitle: state.campaignFormTitleEditReducer.editTitle,
   };
 };
 
-export default connect(mapStateToProps, {dashboardTitleAction})(Dashboard);
+export default connect(mapStateToProps, {dashboardTitleAction, campaignFormTitleEditAction})(Dashboard);

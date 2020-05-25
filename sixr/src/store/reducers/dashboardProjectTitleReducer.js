@@ -1,7 +1,7 @@
 const initialState = {
     title:"",
     isSubmitted:false,
-    displayForm: true
+    displayForm: true,
 }
 
 const dashboardProjectTitleReducer = (state = initialState, action ) => {
@@ -13,6 +13,14 @@ const dashboardProjectTitleReducer = (state = initialState, action ) => {
                 isSubmitted:true,
                 displayForm: false
             }
+        case "SUBMIT_TITLE_EDIT" :
+            return {
+                ...state,
+                title:"",
+                isSubmitted:false,
+                displayForm: true,
+            }
+
         default:
             return state
     }
