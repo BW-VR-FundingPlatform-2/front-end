@@ -8,7 +8,7 @@ import { Grid, Button, Typography, TextField, Paper } from "@material-ui/core";
 //components
 import DashboardForm from "./DashboardForm";
 //Material UI styles
-import { useStyles } from '../theme/componentStyles.js/dashboardStyles'
+import { useStyles } from '../theme/componentStyles/dashboardStyles'
 
 const Dashboard = (props) => {
   // a counter that will be updated every second
@@ -30,7 +30,7 @@ const Dashboard = (props) => {
     isSubmitted: false,
   });
   
-  // this const is where are styles are set. 
+  // this variable is where are styles are set. 
   const classes = useStyles();
 
   // this hanldechange will update the form will update only the title input.
@@ -216,4 +216,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {dashboardTitleAction})(Dashboard);
-// test file share system 

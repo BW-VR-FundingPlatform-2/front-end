@@ -6,12 +6,14 @@ import {
   Tab,
 } from "@material-ui/core";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-import { makeStyles } from "@material-ui/styles";
 import sixr_logo from "../assets/sixr_logo.svg";
 import { Link } from "react-router-dom";
+// import { useStyles } from '../theme/componentStyles/headerStyles'
+import { useStyles } from '../theme/componentStyles/headerStyles'
 
 function ElevationScroll(props) {
   const { children } = props;
+
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
@@ -22,23 +24,11 @@ function ElevationScroll(props) {
   });
 }
 
-const useStyles = makeStyles((theme) => ({
-  sixr_logo: {
-    padding: "30px",
-    width: "10%",
-  },
-  tabContainer: {
-    marginLeft: "auto",
-  },
-  tab: {
-    ...theme.typography.tab,
-    minWidth: 10,
-    marginLeft: "20px",
-  },
-}));
+
 
 function Header() {
   const header_Styles = useStyles();
+  
   const [value, setValue] = useState(0);
 
   useEffect(() => {

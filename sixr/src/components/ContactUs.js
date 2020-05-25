@@ -9,7 +9,7 @@ import {
 import { connect } from "react-redux";
 import { contactUsAction } from "../store/actions/contactUsAction";
 
-const Contact_Us = (props) => {
+const ContactUs = (props) => {
   const [formData, setFormData] = useState({
     name:"",
     email:"",
@@ -122,4 +122,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { contactUsAction })(Contact_Us);
+export default connect(mapStateToProps, { contactUsAction })(ContactUs);

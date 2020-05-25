@@ -18,25 +18,16 @@ import {
   FormControl,
   InputLabel,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+import { useStyles } from '../theme/componentStyles/createCampaignStyles'
 // components
 import {LogIn_CampaignSuccess} from './LogIn_CampaignSuccess'
-import headerImage from "../assets/campaint_main_image.svg";
+
 //Select form values
 import { projectTypes } from "../utils/selectFormValues";
 //import the action
 //make a reducer for the create campaign page
 
-const useStyles = makeStyles((theme) => ({
-  mainImage: {
-    backgroundImage: `url(${headerImage})`,
-    backgroundPosition: "center",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    height: "100%",
-    width: "100%",
-  },
-}));
+
 
 const CreateCampaign = (props) => {
   const history = useHistory();

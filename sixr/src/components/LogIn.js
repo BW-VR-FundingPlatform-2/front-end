@@ -15,8 +15,7 @@ import {
   CircularProgress,
   FormHelperText,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import mainImage from "../assets/login_main_image.svg";
+import { useStyles } from '../theme/componentStyles/loginStyles'
 
 //components
 import { LogIn_CampaignSuccess } from './LogIn_CampaignSuccess'
@@ -27,28 +26,17 @@ import loginActionFail from '../store/actions/loginActionFail'
 import loginSucessAction from '../store/actions/loginSucessAction'
 import {fakeAPICallForTesting} from "../utils/fakeAPICallForTesting";
 
-//styling for Image with Material UI
-const useStyles = makeStyles((theme) => ({
-  mainImage: {
-    backgroundImage: `url(${mainImage})`,
-    backgroundPosition: "center",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    height: "100%",
-    width: "100%",
-  },
-}));
-
 const LogIn = (props) => {
-  //Allows to uses the styling useStyles above
+  //Allows to uses the styling from component styles directory
   const classes = useStyles();
+
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
   });
 
   //lets us use history api from react-router
-  const history = useHistory();
+const history = useHistory();
   
 //Form Handle Change
   const handleChange = (event) => {
@@ -66,7 +54,6 @@ const LogIn = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const {email, password} = formValues
-    console.log("%c FormValues", "color:red", email, password);
 
     try {
       await fakeAPICallForTesting({email, password})
@@ -76,8 +63,6 @@ const LogIn = (props) => {
     } catch (error) {
       props.loginActionFail()
     }
-
-
   };
 
   //This is the login form made with Material UI
