@@ -1,6 +1,7 @@
 const initialState = {
     title:"",
-    isSubmitted:false
+    isSubmitted:false,
+    displayForm: true
 }
 
 const dashboardProjectTitleReducer = (state = initialState, action ) => {
@@ -9,7 +10,8 @@ const dashboardProjectTitleReducer = (state = initialState, action ) => {
             return {
                 ...state,
                 title:action.payload.title,
-                isSubmitted:true
+                isSubmitted:true,
+                displayForm: false
             }
         default:
             return state

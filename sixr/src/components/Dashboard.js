@@ -106,7 +106,7 @@ const Dashboard = (props) => {
         {/* This logic updated the Project Title from Redux.  Submitting send the information to dashboardTitleActioin and will update the redux store */}
         </Grid>
         <Grid item xs={8}>
-          {projectTitleForm.isSubmitted ? false : (
+          {props.displayForm && (
             <>
               {/* When  we submit the title form, it will call dashboardTitleAction, and the redux store will update it's state */}
               <form onSubmit={dashboardTitleAction}>
@@ -125,33 +125,34 @@ const Dashboard = (props) => {
                     />
                   </Grid>
                 </Grid>
-              <Button
-                variant="contained"
-                color="secondary"
-                type="submit"
-                className={classes.buttonStyle}
-                alignitems="flex-end"
-                style={{ marginTop: "1em", height: "35px", width: "150px" }}
-                // onClick={() => setImageLoader(true)}
-                >
-                Submit Title
-              </Button>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  type="submit"
+                  className={classes.buttonStyle}
+                  alignitems="flex-end"
+                  style={{ marginTop: "1em", height: "35px", width: "150px" }}
+                  // onClick={() => setImageLoader(true)}
+                  >
+                  Submit Title
+                </Button>
                 </form>
             </>
           )}
-          {/* End of Logic for Submitting our form.  Once Submitted the Title will now display */}
-
+            {/* When you submit the form, the input will unmount and display the title */}
           {projectTitleForm.isSubmitted
             ? false
             : 
-              <Typography
-                style={{ marginLeft: ".5em", marginBottom:"1em" }}
-                className={classes.headerContent}
-              >
+            <Typography
+            style={{ marginLeft: ".5em", marginBottom:"1em" }}
+            className={classes.headerContent}
+            >
                 {props.title}
               </Typography>
           }
-
+          {/* End of Logic for Submitting our form.  Once Submitted the Title will now display */}
+ 
+          {/* This will display funding goal, this comes from the create campaign form. */}
           <Typography
             style={{ marginLeft: "1em" }}
             className={classes.fundingGoal}
@@ -159,6 +160,7 @@ const Dashboard = (props) => {
             Funding Goal:{" "}
             <span style={{ color: "black" }}>${props.fundingGoal}</span>
           </Typography>
+          {/* This will display project description, this comes from the create campaign form. */}
           <Typography className={classes.description}>
             Description is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry's standard dummy text
@@ -179,15 +181,19 @@ const Dashboard = (props) => {
             galley of type and scrambled it to make a type specimen book. It has
             survived not only five centuries.
           </Typography>
-          {!projectTitleForm.isSubmitted ? null : (
+
+
+          {/* This logic, displays and edit button.  If clicked it will bing up the project title input, and let you update your title */}
+          {props.isSubmitted &&
+          (
             <Button
               variant="contained"
-              color="secondary"
+              color="primary"
               type="submit"
               className={classes.buttonStyle}
               alignitems="flex-end"
-              style={{ marginTop: "1em", height: "35px", width: "150px" }}
-              onClick={() => setImageLoader(true)}
+              style={{ marginTop: "1em", height: "35px", width: "120px"}}
+              // onClick={() => setImageLoader(true)}
             >
               Edit
             </Button>
@@ -205,6 +211,7 @@ const mapStateToProps = (state) => {
     fundingGoal: state.campaignFormReducer.fundingGoal,
     title: state.dashboardProjectTitleReducer.title,
     isSubmitted: state.dashboardProjectTitleReducer.isSubmitted,
+    displayForm: state.dashboardProjectTitleReducer.displayForm
   };
 };
 
