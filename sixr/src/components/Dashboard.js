@@ -177,15 +177,13 @@ const Dashboard = (props) => {
               className={classes.buttonStyle}
               alignitems="flex-end"
               style={{ marginTop: "1em", height: "35px", width: "120px"}}
-              // onClick={() => {
-              //   // props.isSubmitted &&
-              //   props.dashboardTitleAction(() => {
-              //     const SUBMIT_TITLE_EDIT = "SUBMIT_TITLE_EDIT"
-              //     return (dispatch) => {
-              //       dispatch({type:SUBMIT_TITLE_EDIT})
-              //     }
-              //   })
-              // }}
+              onClick={() => setProjectTitleForm((preveState => {
+                props.campaignFormTitleEditAction()
+                return {
+                  ...preveState,
+                  title: ""
+                }
+              }))}
             >
               Edit
             </Button>

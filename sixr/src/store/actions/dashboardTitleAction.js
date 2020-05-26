@@ -6,5 +6,4 @@ const dashboardTitleAction = (formValue) => {
     }
 }
 
-
 export default dashboardTitleAction

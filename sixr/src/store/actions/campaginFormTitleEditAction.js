@@ -1,8 +1,9 @@
-const CAMPAIGN_TITLE_EDIT = "CAMPAIGN_TITLE_EDIT"
+const EDIT_PROJECT_TITLE = "EDIT_PROJECT_TITLE"
+
 
 const campaignFormTitleEditAction = () => {
     return (dispatch) => {
-        dispatch({type:CAMPAIGN_TITLE_EDIT})
+        dispatch({type:EDIT_PROJECT_TITLE})
     }
 }
 
