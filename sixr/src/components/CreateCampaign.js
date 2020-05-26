@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -34,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     },
     formControl: {
         margin: theme.spacing(1),
-        minWidth: 150,
+        minWidth: 155,
       },
       selectEmpty: {
         marginTop: theme.spacing(2),
@@ -49,7 +48,8 @@ export default function CreateCampaign() {
         name: '',
         email: '',
         projects: '',
-        description: ''
+        description: '',
+        donation:''
     })
 
     const [project, setProject] = useState([])
@@ -76,7 +76,8 @@ export default function CreateCampaign() {
             name: '',
             email: '',
             projects: '',
-            description: ''
+            description: '',
+            donation: ''
         })
     }
 
@@ -129,8 +130,10 @@ export default function CreateCampaign() {
                             onChange={changeHandler}
                         />
                     </Grid>
+                    <br></br>
+                    <Grid container spacing={2}>
                     <FormControl className={classes.formControl}>
-                        <InputLabel id="campaign-project">type of project</InputLabel>
+                        <InputLabel id="campaign-project">---select project---</InputLabel>
                         <Select
                             labelID="campaign-project"
                             value={formState.projects}
@@ -146,7 +149,21 @@ export default function CreateCampaign() {
                             <option value="Games">Games</option>
                             <option value="Music">Music</option>
                         </Select>
+                        
                     </FormControl>
+                    <Grid item xs={7} >
+                        <TextField
+                            fullWidth
+                            required
+                            name="donation"
+                            label="Donation Goal"
+                            variant="outlined"
+                            multiline
+                            value={formState.donation}
+                            onChange={changeHandler}
+                        />
+                    </Grid>
+                    </Grid>
                     <Button
                         type="submit"
                         fullWidth
