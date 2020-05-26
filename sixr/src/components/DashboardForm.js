@@ -9,26 +9,34 @@ import {
   Button,
   MenuItem,
 } from "@material-ui/core";
-
-
+import { KeyboardDatePicker } from '@material-ui/pickers';
 
 const DashboardForm = () => {
-    const [ formData, setFormData ] = useState({
-        amount:"",
-        projectType:"",
-        deliveryDate:"",
-        description:"",
-    })
+  const [ selectedDate, setSelectedDate ] = useState(new Date())
+  
+  const [formData, setFormData] = useState({
+    pledgeAmount: "",
+    discount: "",
+    deliveryDate: selectedDate,
+    projectDescription: "",
+  });
 
-    const handleChange = (event) => {
-        const { name , value } = event.target
-        setFormData(prevState => {
-            return {
-                ...prevState,
-                [name]: value
-            }
-        })
-    }
+  console.log("%c Dashboard Form Data", "color:cornflowerblue", formData);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevState) => {
+      return {
+        ...prevState,
+        [name]: value,
+      };
+    });
+  };
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+
   return (
     <>
       <div style={{ padding: "15px", margin: "3em auto", maxWidth: "90%" }}>
@@ -36,13 +44,13 @@ const DashboardForm = () => {
           Create Your Rewards
         </Typography>
         <form>
-          <Paper style={{ padding: "15px", width:"80%", margin:"auto"}}>
+          <Paper style={{ padding: "15px", width: "80%", margin: "auto" }}>
             <Grid container alignItems="flex-start" spacing={3}>
               <Grid item xs={4}>
                 <TextField
                   fullWidth
                   required
-                  name="amount"
+                  name="pledgeAmount"
                   type="text"
                   label="Pledge Amount"
                   variant="outlined"
@@ -54,16 +62,16 @@ const DashboardForm = () => {
                 <TextField
                   fullWidth
                   required
-                  name="projectType"
+                  name="discount"
                   type="text"
-                  label="Project Type"
+                  label="Discount Amount"
                   variant="outlined"
                   onChange={handleChange}
-                  value={formData.projectType}
+                  value={formData.discount}
                 />
               </Grid>
               <Grid item xs={4}>
-                <TextField
+                {/* <TextField
                   fullWidth
                   required
                   name="deliveryDate"
@@ -72,20 +80,32 @@ const DashboardForm = () => {
                   variant="outlined"
                   onChange={handleChange}
                   value={formData.deliveryDate}
+                /> */}
+                <KeyboardDatePicker
+                  margin="dense"
+                  name="deliveryDate"
+                  id="date-picker-dialog"
+                  label="Delivery Date"
+                  format="MM/dd/yyyy"
+                  value={formData.deliveryDate}
+                  onChange={handleDateChange}
+                  KeyboardButtonProps={{
+                    "aria-label": "change date",
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   fullWidth
                   required
-                  name="description"
+                  name="projectDescription"
                   type="text area"
                   label="Project Description"
                   variant="outlined"
                   rows={12}
                   multiline
                   onChange={handleChange}
-                  value={formData.description}
+                  value={formData.projectDescription}
                 />
               </Grid>
               <Grid item style={{ marginTop: 8 }}>
@@ -93,7 +113,7 @@ const DashboardForm = () => {
                   variant="contained"
                   color="secondary"
                   type="submit"
-                  style={{ width: "150px", color:"white" }}
+                  style={{ width: "150px", color: "white" }}
                 >
                   Submit
                 </Button>

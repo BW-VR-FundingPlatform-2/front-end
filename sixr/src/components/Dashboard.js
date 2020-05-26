@@ -191,6 +191,8 @@ const Dashboard = (props) => {
         </Grid>
       </Grid>
       <DashboardForm />
+
+      {/* When form is filled out, cards will appear with your project details */}
     </>
   );
 };
@@ -203,7 +205,6 @@ const mapStateToProps = (state) => {
     title: state.dashboardProjectTitleReducer.title,
     isSubmitted: state.dashboardProjectTitleReducer.isSubmitted,
     displayForm: state.dashboardProjectTitleReducer.displayForm,
-    editTitle: state.campaignFormTitleEditReducer.editTitle,
   };
 };
 

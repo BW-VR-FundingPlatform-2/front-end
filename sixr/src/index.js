@@ -14,6 +14,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 // App Theme for Material UI
 import { ThemeProvider } from "@material-ui/styles";
 import theme from "./theme/theme";
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 
 
 // For Redux
@@ -27,7 +29,9 @@ ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
       <Router>
-        <App />
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <App />
+        </MuiPickersUtilsProvider>
       </Router>
     </ThemeProvider>
   </Provider>,
