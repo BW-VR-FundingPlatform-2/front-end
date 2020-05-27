@@ -34,13 +34,14 @@ const AboutUs = () => {
                   </Typography>
                 </Grid>
                 <Button
+                  style={{color:"#fff", width:"120px"}}
                   variant="contained"
                   color="secondary"
                   className={classes.buttonStyle}
                   component={Link}
-                  to="/createcampange"
+                  to="/signup"
                 >
-                  Create A Campaing
+                  Sign Up!
                 </Button>
               </Grid>
 

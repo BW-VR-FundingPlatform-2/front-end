@@ -21,15 +21,13 @@ const initialtstate = {
           error:true,
           email:"",
           password:"",
+          errorMessage:state.errorMessage
         }
       case "LOGIN_SUCCESS" :
         return {
           ...state,
           isLoading:false,
           success:true,
-          email:"",
-          password:"",
-          // error:false,
         }
       default:
         return state;

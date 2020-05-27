@@ -52,13 +52,22 @@ const history = useHistory();
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log(formValues)
+    props.loginAction()
+
     Axios.post("https://vr-funding-platform.herokuapp.com/api/auth/login", formValues)
-    .then(res => console.log(res))
-    .then(() => {
-      
+    .then(res => {
+      console.log(res)
+      localStorage.setItem("token",res.data.token);
+      history.push("./createcampange")
+      props.loginSucessAction()
     })
-    .catch(err => console.log(err))
+    .catch((err) => {
+      props.loginActionFail()
+      setFormValues({
+        username: "",
+        password: "",
+      })
+    })
   }
 
 

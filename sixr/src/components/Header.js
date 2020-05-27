@@ -10,6 +10,7 @@ import sixr_logo from "../assets/sixr_logo.svg";
 import { Link } from "react-router-dom";
 // import { useStyles } from '../theme/componentStyles/headerStyles'
 import { useStyles } from '../theme/componentStyles/headerStyles'
+import { connect } from "react-redux";
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -26,26 +27,26 @@ function ElevationScroll(props) {
 
 
 
-function Header() {
+function Header(props) {
   const header_Styles = useStyles();
   
-  const [value, setValue] = useState(0);
+  // const [value, setValue] = useState(0);
 
-  useEffect(() => {
-    if (window.location.pathname === "/" && value !== 0) {
-      setValue(0);
-    } else if (window.location.pathname === "/createcampaign" && value !== 1) {
-      setValue(1);
-    } else if (window.location.pathname === "/browseprojects" && value !== 2) {
-      setValue(2);
-    } else if (window.location.pathname === "/about" && value !== 3) {
-      setValue(3);
-    } else if (window.location.pathname === "/signUp" && value !== 4) {
-      setValue(4);
-    } else if (window.location.pathname === "/dashboard" && value !== 5) {
-      setValue(5);
-    }
-  }, [value]);
+  // useEffect(() => {
+  //   if (window.location.pathname === "/" && value !== 0) {
+  //     setValue(0);
+  //   } else if (window.location.pathname === "/createcampaign" && value !== 1) {
+  //     setValue(1);
+  //   } else if (window.location.pathname === "/browseprojects" && value !== 2) {
+  //     setValue(2);
+  //   } else if (window.location.pathname === "/about" && value !== 3) {
+  //     setValue(3);
+  //   } else if (window.location.pathname === "/signUp" && value !== 4) {
+  //     setValue(4);
+  //   } else if (window.location.pathname === "/dashboard" && value !== 5) {
+  //     setValue(5);
+  //   }
+  // }, [value]);
 
 
 
@@ -57,10 +58,10 @@ function Header() {
               <img className={header_Styles.sixr_logo} src={sixr_logo} alt="Site sixr_logo" />
               <Tabs
               className={header_Styles.tabContainer}
-              value={value}
-              onChange={(event, value) => {
-                setValue(value);
-              }}
+              value={0}
+              // onChange={(event, value) => {
+              //   setValue(value);
+              // }}
             >
                <Tab
                 className={header_Styles.tab}
@@ -69,13 +70,15 @@ function Header() {
                 to="/"
                 disableRipple
               />
-              <Tab
+              {props.success && 
+                <Tab
                 className={header_Styles.tab}
                 label="Create A Campaign"
                 component={Link}
                 to="createcampange"
                 disableRipple
-              />
+              />              
+              }
               <Tab
                 className={header_Styles.tab}
                 label="Browse Projects"
@@ -114,4 +117,10 @@ function Header() {
   );
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    success:state.loginReducer.success
+  }
+}
+
+export default connect()(Header);
