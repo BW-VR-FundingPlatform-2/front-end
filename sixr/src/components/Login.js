@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Link } from "react-router-dom"
+import * as yup from 'yup'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,20 +34,64 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const logSchema = yup.object().shape({
+    userName: yup.string().required("you need to input your name"),
+    password: yup
+        .string()
+        .required("Password is required")
+        .min(8, "password must be at least 8 characters")
+})
+
+
 export default function Login() {
     const classes = useStyles();
 
     const [formState, setFormState] = useState({
         id: '',
-        email: '',
+        userName: '',
         password: '',
         rememberMe: false
     })
 
     const [remember, setRemember] = useState(false)
 
-    const changeHandler = event => {
+    const [errorState, setErrorState] = useState({
+        userName: "",
+        email: "",
+        password: ""
+    });
+    const [disabled, setDisabled] = useState(true)
 
+    useEffect(() => {
+        logSchema.isValid(formState).then(valid => {
+            setDisabled(!valid);
+        })
+    }, [formState]);
+
+    const validate = event => {
+
+        const value =
+            event.target.type === "checkbox" ? event.target.checked : event.target.value;
+        yup
+            .reach(logSchema, event.target.name)
+            .validate(value)
+            .then(valid => {
+                setErrorState({
+                    ...errorState,
+                    [event.target.name]: ""
+                });
+            })
+            .catch(err => {
+                setErrorState({
+                    ...errorState,
+                    [event.target.name]: err.errors[0]
+                });
+            });
+    }
+
+    const changeHandler = event => {
+        event.persist();
+        validate(event);
         let value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
 
         setFormState({ ...formState, [event.target.name]: value })
@@ -57,7 +102,7 @@ export default function Login() {
 
         setFormState({
             id: '',
-            email: '',
+            userName: '',
             password: '',
             rememberMe: false
         })
@@ -78,13 +123,16 @@ export default function Login() {
                         margin="normal"
                         required
                         fullWidth
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
+                        label="User Name"
+                        name="userName"
+                        autoComplete="userName"
                         autoFocus
-                        value={formState.email}
+                        value={formState.userName}
                         onChange={changeHandler}
                     />
+                    {errorState.userName.length > 0 ? (
+                        <p className="errors">{errorState.userName}</p>
+                    ) : null}
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -97,6 +145,9 @@ export default function Login() {
                         value={formState.password}
                         onChange={changeHandler}
                     />
+                    {errorState.password.length > 0 ? (
+                        <p className="errors">{errorState.password}</p>
+                    ) : null}
                     <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
                         label="Remember me"
@@ -106,6 +157,7 @@ export default function Login() {
                         fullWidth
                         variant="contained"
                         color="primary"
+                        disabled={disabled}
                         className={classes.submit}
                     >
                         Login
