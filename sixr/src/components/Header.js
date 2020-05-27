@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
-import {
-  AppBar,
-  Toolbar,
-  Tabs,
-  Tab,
-} from "@material-ui/core";
+import { AppBar, Toolbar, Tabs, Tab, Button } from "@material-ui/core";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import sixr_logo from "../assets/sixr_logo.svg";
 import { Link } from "react-router-dom";
 // import { useStyles } from '../theme/componentStyles/headerStyles'
-import { useStyles } from '../theme/componentStyles/headerStyles'
+import { useStyles } from "../theme/componentStyles/headerStyles";
 import { connect } from "react-redux";
+import LogOut from "./LogOut";
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -25,11 +21,9 @@ function ElevationScroll(props) {
   });
 }
 
-
-
 function Header(props) {
   const header_Styles = useStyles();
-  
+
   // const [value, setValue] = useState(0);
 
   // useEffect(() => {
@@ -48,37 +42,30 @@ function Header(props) {
   //   }
   // }, [value]);
 
-
-
   return (
     <>
       <ElevationScroll>
-        <AppBar position="sticky" color="inherit" >
+        <AppBar position="sticky" color="inherit">
           <Toolbar>
-              <img className={header_Styles.sixr_logo} src={sixr_logo} alt="Site sixr_logo" />
-              <Tabs
+            <img
+              className={header_Styles.sixr_logo}
+              src={sixr_logo}
+              alt="Site sixr_logo"
+            />
+            <Tabs
               className={header_Styles.tabContainer}
               value={0}
               // onChange={(event, value) => {
               //   setValue(value);
               // }}
             >
-               <Tab
+              <Tab
                 className={header_Styles.tab}
                 label="Home"
                 component={Link}
                 to="/"
                 disableRipple
               />
-              {props.success && 
-                <Tab
-                className={header_Styles.tab}
-                label="Create A Campaign"
-                component={Link}
-                to="createcampange"
-                disableRipple
-              />              
-              }
               <Tab
                 className={header_Styles.tab}
                 label="Browse Projects"
@@ -93,13 +80,29 @@ function Header(props) {
                 to="/about"
                 disableRipple
               />
-              <Tab
-                className={header_Styles.tab}
-                label="Sign Up"
-                component={Link}
-                to="/signUp"
-                disableRipple
-              />
+
+              {/* If there a token in local storage, the Sign Up tab will unmount */}
+              {localStorage.getItem("token") === true ? null : (
+                <Tab
+                  className={header_Styles.tab}
+                  label="Sign Up"
+                  component={Link}
+                  to="/signUp"
+                  disableRipple
+                />
+              )}
+
+              {/* Checks local storage for a token, if it returns falsy/null the tab will not render, if true it will render */}
+              {localStorage.getItem("token") && (
+                <Tab
+                  className={header_Styles.tab}
+                  label="Create A Campaign"
+                  component={Link}
+                  to="createcampange"
+                  disableRipple
+                />
+              )}
+
               {/* This Is a Test Tab for Dashboard.  Will Be removed, and put on a private route */}
               <Tab
                 className={header_Styles.tab}
@@ -108,6 +111,9 @@ function Header(props) {
                 to="/dashboard"
                 disableRipple
               />
+
+              {/* {localStorage.getItem("token") ? <LogOut /> : null} */}
+              <LogOut />
             </Tabs>
           </Toolbar>
         </AppBar>
@@ -117,10 +123,4 @@ function Header(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    success:state.loginReducer.success
-  }
-}
-
-export default connect()(Header);
+export default Header;

@@ -5,6 +5,7 @@ import campaignFormReducer from './campaignFormReducer'
 import dashboardProjectTitleReducer from './dashboardProjectTitleReducer'
 import dashboardFormReducer from './dashboardFormReducer'
 import signUpReducer from './signUpReducer'
+import logOutReducer from './logOutReducer'
 
 const rootReducer = combineReducers({
   loginReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   dashboardProjectTitleReducer,
   dashboardFormReducer,
   signUpReducer,
+  logOutReducer,
 
 });
 

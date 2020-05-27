@@ -20,12 +20,11 @@ function App() {
     <div>
       <Header />
       <Route exact path="/" component={HomePage} />
-      <PrivateRoute exact path="/createcampange" component={CreateCampange}/>
-      {/* <Route exact path="/createcampange" component={createCampange} /> */}
       <Route exact path="/browseprojects" component={BrowseProjects} />
       <Route exact path="/about" component={AboutUs} />
       <Route exact path="/login" component={LogIn} />
       <Route exact path="/signup" component={SignUp} />
+      <PrivateRoute exact path="/createcampange" component={CreateCampange}/>
       <Route exact path="/dashboard" component={Dashboard} />
       <Footer />
     </div>
