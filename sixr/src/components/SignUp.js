@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 //connect function form redux
 import { connect } from "react-redux";
 //Link from react router
@@ -18,22 +18,25 @@ import {
 import { useStyles } from '../theme/componentStyles/loginStyles'
 
 //components
-import { LogIn_CampaignSuccess } from './LogIn_CampaignSuccess'
+// import { LogIn_CampaignSuccess } from './LogIn_CampaignSuccess'
+import LogIn from '../components/LogIn'
 
 //Actions 
-import loginAction from "../store/actions/loginAction";
-import loginActionFail from '../store/actions/loginActionFail'
-import loginSucessAction from '../store/actions/loginSucessAction'
+import signUpAction from '../store/actions/signUpAction'
+import userAlreadyExistAction from '../store/actions/userAlreadyExistAction'
 import Axios from "axios";
 
-const LogIn = (props) => {
+const SignUp = (props) => {
   //Allows to uses the styling from component styles directory
   const classes = useStyles();
 
   const [formValues, setFormValues] = useState({
     username: "",
     password: "",
+    email:"",
   });
+
+  console.log("%c SignUP", "color:red", formValues)
 
   //lets us use history api from react-router
 const history = useHistory();
@@ -52,13 +55,26 @@ const history = useHistory();
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log(formValues)
-    Axios.post("https://vr-funding-platform.herokuapp.com/api/auth/login", formValues)
+    Axios.post("https://vr-funding-platform.herokuapp.com/api/auth/register", formValues)
     .then(res => console.log(res))
     .then(() => {
-      
+        props.signUpAction()
+        history.push('./login')
+        setFormValues({
+            username: "",
+            password: "",
+            email:"",
+        })
     })
-    .catch(err => console.log(err))
+    .catch((err) => {
+        console.log("Singup Error", err)
+        props.userAlreadyExistAction()
+        setFormValues({
+            username: "",
+            password: "",
+            email:"",
+        })
+    })
   }
 
 
@@ -77,10 +93,9 @@ const history = useHistory();
         </Grid>
       </Grid>
       {
-        props.success 
-        ? <>    
-          {/* This will be a private route to our Dashboard  */}
-        <LogIn_CampaignSuccess />
+        props.signUpSuccess
+        ? <>      
+        <LogIn />
       </>
         :
       <div style={{ padding: "15px", margin: "3em auto", maxWidth: "400px" }}>
@@ -99,8 +114,8 @@ const history = useHistory();
                 gutterBottom
                 color="secondary"
               >
-                Log In!
-                {props.error && <FormHelperText style={{color:"red"}}>{props.errorMessage}</FormHelperText>}
+                Sign Up!
+                {props.userExistError && <FormHelperText style={{color:"red"}}>{props.userExistErrorMessage}</FormHelperText>}
               </Typography>
               <Grid item xs={12}>
                 <TextField
@@ -111,6 +126,7 @@ const history = useHistory();
                   label="User Name"
                   variant="outlined"
                   onChange={handleChange}
+                  value={formValues.username}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -122,11 +138,24 @@ const history = useHistory();
                   label="Password"
                   variant="outlined"
                   onChange={handleChange}
+                  value={formValues.password}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  required
+                  name="email"
+                  type="email"
+                  label="Email"
+                  variant="outlined"
+                  onChange={handleChange}
+                  value={formValues.email}
                 />
               </Grid>
               <Grid item style={{ width: "100%" }}>
                 {/* The ternary will change the type of button, a submit or a loading state */}
-                {props.isLoading ? (
+                {props.signUpLoading ? (
                   <Button
                   variant="contained"
                   color="secondary"
@@ -142,22 +171,22 @@ const history = useHistory();
                     color="secondary"
                     style={{ width: "100%" }}
                   >
-                    <span style={{color:"white"}}>Log In!</span>
+                    <span style={{color:"white"}}>Sign Up!</span>
                   </Button>
                 )}
               </Grid>
               <Grid item>
                 <Typography>
-                  New User?
+                  Already A member? 
                   <Link
                     color="secondary"
                     component={RouterLink}
-                    to="/signup"
+                    to="login"
                   >
                     {" "}
                     Click Here{" "}
                   </Link>
-                  to create an account.
+                  to Log In.
                 </Typography>
               </Grid>
             </Grid>
@@ -172,14 +201,11 @@ const history = useHistory();
 
 const mapStateToProps = (state) => {
   return {
-    isLoading: state.loginReducer.isLoading,
-    errorMessage: state.loginReducer.errorMessage,
-    error:state.loginReducer.error,
-    success:state.loginReducer.success,
+    signUpSuccess: state.signUpReducer.signUpSuccess,
+    userExistErrorMessage: state.signUpReducer.userExistErrorMessage,
+    userExistError: state.signUpReducer.userExistError,
+    signUpLoading: state.signUpReducer.signUpLoading,
   };
 };
 
-export default connect(mapStateToProps, { loginAction, loginActionFail, loginSucessAction })(LogIn);
-
-// component={Link}
-// to="createcampange"
+export default connect(mapStateToProps, { signUpAction, userAlreadyExistAction})(SignUp);

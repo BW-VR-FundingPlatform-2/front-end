@@ -10,6 +10,9 @@ import BrowseProjects from './components/BrowseProjects';
 import AboutUs from './components/AboutUs';
 import LogIn from './components/LogIn';
 import Dashboard from './components/Dashboard'
+import SignUp from './components/SignUp'
+
+//privateRoute
 
 function App() {
   return (
@@ -20,6 +23,7 @@ function App() {
       <Route exact path="/browseprojects" component={BrowseProjects} />
       <Route exact path="/about" component={AboutUs} />
       <Route exact path="/login" component={LogIn} />
+      <Route exact path="/signup" component={SignUp} />
       <Route exact path="/dashboard" component={Dashboard} />
       <Footer />
     </div>

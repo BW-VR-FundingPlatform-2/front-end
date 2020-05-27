@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 // For connecting store to compotnent for redux
 import { connect } from "react-redux";
+import Axios from 'axios'
 //Renaming link from react router in order to use it with this component.
 import { Link as routerLink } from 'react-router-dom'
 import { useHistory } from "react-router-dom"
@@ -48,6 +49,8 @@ const CreateCampaign = (props) => {
       };
     });
   };
+
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();

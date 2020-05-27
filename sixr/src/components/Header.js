@@ -40,7 +40,7 @@ function Header() {
       setValue(2);
     } else if (window.location.pathname === "/about" && value !== 3) {
       setValue(3);
-    } else if (window.location.pathname === "/login" && value !== 4) {
+    } else if (window.location.pathname === "/signUp" && value !== 4) {
       setValue(4);
     } else if (window.location.pathname === "/dashboard" && value !== 5) {
       setValue(5);
@@ -92,9 +92,9 @@ function Header() {
               />
               <Tab
                 className={header_Styles.tab}
-                label="Log In"
+                label="Sign Up"
                 component={Link}
-                to="/login"
+                to="/signUp"
                 disableRipple
               />
               {/* This Is a Test Tab for Dashboard.  Will Be removed, and put on a private route */}

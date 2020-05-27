@@ -8,6 +8,7 @@ import { Grid, Button, Typography, TextField, Paper } from "@material-ui/core";
 // import { makeStyles } from "@material-ui/styles";
 //components
 import DashboardForm from "./DashboardForm";
+import RewardCards from './RewardCards'
 //Material UI styles
 import { useStyles } from '../theme/componentStyles/dashboardStyles'
 
@@ -191,8 +192,11 @@ const Dashboard = (props) => {
         </Grid>
       </Grid>
       <DashboardForm />
-
+      {/* <RewardCards /> */}
       {/* When form is filled out, cards will appear with your project details */}
+      {props.length.map(() => {
+        return <RewardCards />
+      })}
     </>
   );
 };
@@ -205,6 +209,7 @@ const mapStateToProps = (state) => {
     title: state.dashboardProjectTitleReducer.title,
     isSubmitted: state.dashboardProjectTitleReducer.isSubmitted,
     displayForm: state.dashboardProjectTitleReducer.displayForm,
+    length: state.dashboardFormReducer,
   };
 };
 
