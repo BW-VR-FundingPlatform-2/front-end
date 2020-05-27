@@ -35,15 +35,14 @@ const useStyles = makeStyles((theme) => ({
 
 //yup schema
 const regSchema = yup.object().shape({
-  userName: yup.string().required("you need to input your name"),
+  username: yup.string().required("you need to input your user name"),
+  password: yup
+  .string()
+  .required("Password is required"),
   email: yup
     .string()
     .email("E-mail is not valid")
-    .required("E-mail is required"),
-  password: yup
-    .string()
-    .required("Password is required")
-    .min(8, "password must be at least 8 characters")
+    .required("E-mail is required")
 })
 
 export default function Register() {
@@ -51,16 +50,16 @@ export default function Register() {
   //initial state of the form
   const [formState, setFormState] = useState({
     id: '',
-    userName: '',
-    email: '',
-    password: ''
+    username: '',
+    password: '',
+    email: ''
   })
 
   //initial state for errors
   const [errorState, setErrorState] = useState({
-    userName: "",
-    email: "",
-    password: ""
+    username: "",
+    password: "",
+    email: ""
   });
   //setting a disabled state for our submit button
   const [disabled, setDisabled] = useState(true)
@@ -110,7 +109,7 @@ export default function Register() {
   const Submit = event => {
     event.preventDefault()
 
-    axios.post('https://reqres.in/api/users', formState)
+    axios.post('https://vr-funding-platform.herokuapp.com/api/auth/register', formState)
       .then(res => {
         setUsers([...users, res.data])
         console.log(res.data)
@@ -119,9 +118,9 @@ export default function Register() {
 
     setFormState({
       id: '',
-      userName: '',
-      email: '',
-      password: ''
+      username: '',
+      password: '',
+      email: ''
     });
   }
 
@@ -142,18 +141,18 @@ export default function Register() {
           <Grid container spacing={2}>
             <Grid item xs={12} >
               <TextField
-                autoComplete="userName"
-                name="userName"
+                autoComplete="username"
+                name="username"
                 variant="outlined"
                 required
                 fullWidth
                 label="User Name"
                 autoFocus
-                value={formState.userName}
+                value={formState.username}
                 onChange={changeHandler}
               />
-              {errorState.userName.length > 0 ? (
-                <p className="errors">{errorState.userName}</p>
+              {errorState.username.length > 0 ? (
+                <p className="errors">{errorState.username}</p>
               ) : null}
             </Grid>
 

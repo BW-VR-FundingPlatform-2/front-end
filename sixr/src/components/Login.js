@@ -35,11 +35,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const logSchema = yup.object().shape({
-    userName: yup.string().required("you need to input your name"),
+    username: yup.string().required("you need to input your name"),
     password: yup
         .string()
         .required("Password is required")
-        .min(8, "password must be at least 8 characters")
+        
 })
 
 
@@ -48,7 +48,7 @@ export default function Login() {
 
     const [formState, setFormState] = useState({
         id: '',
-        userName: '',
+        username: '',
         password: '',
         rememberMe: false
     })
@@ -56,7 +56,7 @@ export default function Login() {
     const [remember, setRemember] = useState(false)
 
     const [errorState, setErrorState] = useState({
-        userName: "",
+        username: "",
         email: "",
         password: ""
     });
@@ -102,7 +102,7 @@ export default function Login() {
 
         setFormState({
             id: '',
-            userName: '',
+            username: '',
             password: '',
             rememberMe: false
         })
@@ -124,14 +124,14 @@ export default function Login() {
                         required
                         fullWidth
                         label="User Name"
-                        name="userName"
-                        autoComplete="userName"
+                        name="username"
+                        autoComplete="username"
                         autoFocus
-                        value={formState.userName}
+                        value={formState.username}
                         onChange={changeHandler}
                     />
-                    {errorState.userName.length > 0 ? (
-                        <p className="errors">{errorState.userName}</p>
+                    {errorState.username.length > 0 ? (
+                        <p className="errors">{errorState.username}</p>
                     ) : null}
                     <TextField
                         variant="outlined"
