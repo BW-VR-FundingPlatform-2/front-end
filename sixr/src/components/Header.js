@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { AppBar, Toolbar, Tabs, Tab } from "@material-ui/core";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import sixr_logo from "../assets/sixr_logo.svg";
@@ -8,7 +8,6 @@ import { useStyles } from "../theme/componentStyles/headerStyles";
 import { connect } from "react-redux";
 //components
 import LogOut from "./LogOut";
-
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -83,7 +82,7 @@ function Header(props) {
                 disableRipple
               />
 
-              {/* If there a token in local storage, the Sign Up tab will unmount */}
+              {props.success === false ? (
                 <Tab
                   className={header_Styles.tab}
                   label="Sign Up"
@@ -91,33 +90,42 @@ function Header(props) {
                   to="/signUp"
                   disableRipple
                 />
-
+              ) : null}
 
               {/* Just realized this is a security flaw, you can bypass the login by adding "token" to local storage.  If you refresh the page, you're logged in.  I'll have to save the token to state.  And render the component only if my token matches.  Accidentally hacked my own site.  */}
               {/* Checks local storage for a token, if it returns falsy/null the tab will not render, if true it will render */}
-              {localStorage.getItem("token") && (
+              {/* {localStorage.getItem("token") && (
                 <Tab
                   className={header_Styles.tab}
                   label="Create A Campaign"
                   component={Link}
-                  to="createcampange"
+                  to="createcampaign"
+                  disableRipple
+                />
+              )} */}
+              {/* These last 3 taps will render when a user is logged in */}
+              {props.success && (
+                <Tab
+                  className={header_Styles.tab}
+                  label="Create A Campaign"
+                  component={Link}
+                  to="createcampaign"
                   disableRipple
                 />
               )}
 
               {/* This Is a Test Tab for Dashboard.  Will Be removed, and put on a private route */}
-              {localStorage.getItem("token") && (
-                  <Tab
-                    className={header_Styles.tab}
-                    label="Dashboard"
-                    component={Link}
-                    to="/dashboard"
-                    disableRipple
-                  />
+              {props.success && (
+                <Tab
+                  className={header_Styles.tab}
+                  label="Dashboard"
+                  component={Link}
+                  to="/dashboard"
+                  disableRipple
+                />
               )}
 
-              {localStorage.getItem("token") && <LogOut /> }
-              {/* <LogOut /> */}
+              {props.success && <LogOut />}
             </Tabs>
           </Toolbar>
         </AppBar>
@@ -127,4 +135,11 @@ function Header(props) {
   );
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    success: state.loginReducer.success,
+  };
+};
+
+export default connect(mapStateToProps)(Header);
+// render tabs only if token matches

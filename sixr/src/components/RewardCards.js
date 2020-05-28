@@ -12,7 +12,7 @@ import {
 
 const RewardCards = (props) => {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
+  // const bull = <span className={classes.bullet}>•</span>;
   return (
     <Grid container style={{ margin: "2em 2em" }}>
       <Grid item xs={2}>

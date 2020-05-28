@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, Grid, Button, Typography } from "@material-ui/core";
-import { useStyles } from "../theme/componentStyles/aboutUsStyles"
+import { useStyles } from "../theme/componentStyles/aboutUsStyles";
+import { connect } from "react-redux";
 
-const AboutUs = () => {
+const AboutUs = (props) => {
   const classes = useStyles();
   return (
     <>
@@ -12,38 +13,43 @@ const AboutUs = () => {
           container
           alignitems="center"
           justify="center"
-          style={{ height: "30em"}}
+          style={{ height: "30em" }}
         >
-
-              <Grid
-                container
-                direction="column"
-                style={{ textAlign: "center" }}
+          <Grid container direction="column" style={{ textAlign: "center" }}>
+            <Grid item>
+              <Typography variant="h3">Sixr</Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant="body1" className={classes.mainCardFont}>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the.
+              </Typography>
+            </Grid>
+            {props.success ? (
+              <Button
+                style={{ color: "#fff", width: "120px" }}
+                variant="contained"
+                color="secondary"
+                className={classes.buttonStyle}
+                component={Link}
+                to="/dashboard"
               >
-                <Grid item>
-                  <Typography variant="h3">Sixr</Typography>
-                </Grid>
-                <Grid item>
-                  <Typography
-                    variant="body1"
-                    className={classes.mainCardFont}
-                  >
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the.
-                  </Typography>
-                </Grid>
-                <Button
-                  style={{color:"#fff", width:"120px"}}
-                  variant="contained"
-                  color="secondary"
-                  className={classes.buttonStyle}
-                  component={Link}
-                  to="/signup"
-                >
-                  Sign Up!
-                </Button>
-              </Grid>
+                Dashboard
+              </Button>
+            ) : (
+              <Button
+                style={{ color: "#fff", width: "120px" }}
+                variant="contained"
+                color="secondary"
+                className={classes.buttonStyle}
+                component={Link}
+                to="/signup"
+              >
+                Sign Up!
+              </Button>
+            )}
+          </Grid>
 
           <div className={classes.mainImage} />
         </Grid>
@@ -90,40 +96,34 @@ const AboutUs = () => {
         </Grid>
       </Grid>
 
-
       <Grid item>
         <Grid
           container
           alignitems="center"
           justify="center"
-          style={{ height: "30em"}}
+          style={{ height: "30em" }}
         >
-
-              <Grid
-                container
-                direction="column"
-                style={{ textAlign: "center" }}
+          <Grid container direction="column" style={{ textAlign: "center" }}>
+            <Grid item>
+              <Typography variant="h3">Sixr</Typography>
+            </Grid>
+            <Grid item>
+              <Typography
+                variant="body1"
+                className={classes.mainCardFont}
+                style={{ margin: " auto", width: "70%", marginBottom: "3em" }}
               >
-                <Grid item>
-                  <Typography variant="h3">Sixr</Typography>
-                </Grid>
-                <Grid item>
-                  <Typography
-                    variant="body1"
-                    className={classes.mainCardFont}
-                    style={{margin:" auto", width:"70%", marginBottom:"3em"}}
-                  >
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the. Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the. Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the.
-                  </Typography>
-                </Grid>
-
-              </Grid>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the. Lorem Ipsum is simply dummy text of the
+                printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the. Lorem Ipsum is
+                simply dummy text of the printing and typesetting industry.
+                Lorem Ipsum has been the industry's standard dummy text ever
+                since the.
+              </Typography>
+            </Grid>
+          </Grid>
 
           <div className={classes.footerImage} />
         </Grid>
@@ -169,11 +169,13 @@ const AboutUs = () => {
           </Card>
         </Grid>
       </Grid>
-
-      
-      
     </>
   );
 };
 
-export default AboutUs;
+const mapStateToProps = (state) => {
+  return {
+    success: state.loginReducer.success,
+  };
+};
+export default connect(mapStateToProps)(AboutUs);

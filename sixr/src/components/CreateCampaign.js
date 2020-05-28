@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 // For connecting store to compotnent for redux
 import { connect } from "react-redux";
-import Axios from 'axios'
+// import Axios from 'axios'
 //Renaming link from react router in order to use it with this component.
-import { Link as routerLink } from 'react-router-dom'
+// import { Link as routerLink } from 'react-router-dom'
 import { useHistory } from "react-router-dom"
 import campaignFormAction from "../store/actions/campaignFormAction";
 import {
   Typography,
   Paper,
   TextField,
-  Link,
+  // Link,
   Grid,
   Button,
   MenuItem,
@@ -21,7 +21,7 @@ import {
 } from "@material-ui/core";
 import { useStyles } from '../theme/componentStyles/createCampaignStyles'
 // components
-import {LogIn_CampaignSuccess} from './LogIn_CampaignSuccess'
+import LogInCampaignSuccess from './LogInCampaignSuccess'
 
 //Select form values
 import { projectTypes } from "../utils/selectFormValues";
@@ -64,7 +64,7 @@ const CreateCampaign = (props) => {
       {props.formSubmitted 
       ?        
       <>
-      < LogIn_CampaignSuccess />
+      < LogInCampaignSuccess />
 
   </>
       :

@@ -5,6 +5,7 @@ const initialtstate = {
     error:false,
     errorMessage:"Incorrect Email or Password",
     success:false,
+    token:""
   };
   
   const loginReducer = (state = initialtstate, action) => {
@@ -28,7 +29,13 @@ const initialtstate = {
           ...state,
           isLoading:false,
           success:true,
+          token:action.payload
         }
+        case "LOG_OUT" :
+          return {
+            ...state,
+            success:false
+          }
       default:
         return state;
     }
