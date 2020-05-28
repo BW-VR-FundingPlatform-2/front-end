@@ -22,7 +22,7 @@ const HomePage = () => {
                         <Grid item>
                             <Typography variant="body1" className={homePage_styles.mainCardFont}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the.</Typography>
                         </Grid>
-                        <Button variant="contained" color="primary" className={homePage_styles.buttonStyle}                  component={Link}
+                        <Button variant="contained" color="primary" className={homePage_styles.buttonStyle}   style={{margin:'auto'}}                component={Link}
                 to="/signup">Sign Up!</Button>
                      </Grid>
                  </CardContent>

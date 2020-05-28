@@ -34,7 +34,7 @@ const AboutUs = () => {
                   </Typography>
                 </Grid>
                 <Button
-                  style={{color:"#fff", width:"120px"}}
+                  style={{color:"#fff", width:"120px", margin:'auto'}}
                   variant="contained"
                   color="secondary"
                   className={classes.buttonStyle}

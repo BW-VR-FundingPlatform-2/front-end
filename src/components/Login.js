@@ -117,7 +117,7 @@ const LogIn = (props) => {
         Axios.post("https://vr-funding-platform.herokuapp.com/api/auth/login", formState)
         .then(res => {
           localStorage.setItem("token",res.data.token);
-          history.push("/createcampange")
+          history.push("/")
           props.loginSucessAction()
           props.logOutAction()
         })
