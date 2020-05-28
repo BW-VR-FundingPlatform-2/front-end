@@ -12,6 +12,18 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Link } from "react-router-dom"
 import * as yup from 'yup'
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom"
+
+//components
+import { LogIn_CampaignSuccess } from './LogIn_CampaignSuccess'
+
+//Actions 
+import loginAction from "../store/actions/loginAction";
+import loginActionFail from '../store/actions/loginActionFail'
+import loginSucessAction from '../store/actions/loginSucessAction'
+import logOutAction from '../store/actions/logOutAction'
+import Axios from "axios";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -43,17 +55,18 @@ const logSchema = yup.object().shape({
 })
 
 
-export default function Login() {
+const LogIn = (props) => {
     const classes = useStyles();
 
     const [formState, setFormState] = useState({
-        id: '',
         username: '',
         password: '',
         rememberMe: false
     })
 
     const [remember, setRemember] = useState(false)
+
+    const history = useHistory();
 
     const [errorState, setErrorState] = useState({
         username: "",
@@ -99,14 +112,23 @@ export default function Login() {
 
     const Submit = event => {
         event.preventDefault()
+        props.loginAction()
 
-        setFormState({
-            id: '',
-            username: '',
-            password: '',
-            rememberMe: false
+        Axios.post("https://vr-funding-platform.herokuapp.com/api/auth/login", formState)
+        .then(res => {
+          localStorage.setItem("token",res.data.token);
+          history.push("/createcampange")
+          props.loginSucessAction()
+          props.logOutAction()
         })
-    }
+        .catch((err) => {
+          props.loginActionFail()
+          setFormState({
+            username: "",
+            password: "",
+          })
+        })
+      }
 
     return (
         <Container component="main" maxWidth="xs">
@@ -180,4 +202,16 @@ export default function Login() {
             </Box>
         </Container>
     );
-}
+};
+
+const mapStateToProps = (state) => {
+    return {
+      isLoading: state.loginReducer.isLoading,
+      errorMessage: state.loginReducer.errorMessage,
+      error:state.loginReducer.error,
+      success:state.loginReducer.success,
+    };
+  };
+  
+  export default connect(mapStateToProps, { loginAction, loginActionFail, loginSucessAction, logOutAction  })(LogIn);
+  

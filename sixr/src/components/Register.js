@@ -11,6 +11,10 @@ import Container from '@material-ui/core/Container';
 import axios from 'axios'
 import { Link } from "react-router-dom"
 import * as yup from 'yup'
+import signUpAction from '../store/actions/signUpAction'
+import userAlreadyExistAction from '../store/actions/userAlreadyExistAction'
+import { useHistory } from "react-router-dom"
+import { connect } from "react-redux";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -37,15 +41,15 @@ const useStyles = makeStyles((theme) => ({
 const regSchema = yup.object().shape({
   username: yup.string().required("you need to input your user name"),
   password: yup
-  .string()
-  .required("Password is required"),
+    .string()
+    .required("Password is required"),
   email: yup
     .string()
     .email("E-mail is not valid")
     .required("E-mail is required")
 })
 
-export default function Register() {
+const Register = props => {
   const classes = useStyles();
   //initial state of the form
   const [formState, setFormState] = useState({
@@ -64,7 +68,7 @@ export default function Register() {
   const [disabled, setDisabled] = useState(true)
 
   //setting the state for users for our api call
-  const [users, setUsers] = useState([])
+  const history = useHistory();
 
   //checking if our state is valid or not. if it is enabled the button if not keep it disabled.
   useEffect(() => {
@@ -109,14 +113,25 @@ export default function Register() {
     event.preventDefault()
 
     axios.post("https://vr-funding-platform.herokuapp.com/api/auth/register", formState)
-    .then(res => console.log(res))
-
-
-    setFormState({
-      username: '',
-      password: '',
-      email: ''
-    });
+      .then(res => console.log(res))
+      .then(() => {
+        props.signUpAction()
+        history.push('./login')
+        setFormState({
+          username: "",
+          password: "",
+          email: "",
+        })
+      })
+      .catch((err) => {
+        console.log("Singup Error", err)
+        props.userAlreadyExistAction()
+        setFormState({
+          username: "",
+          password: "",
+          email: "",
+        })
+      })
   }
 
 
@@ -208,4 +223,14 @@ export default function Register() {
       </Box>
     </Container>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    signUpSuccess: state.signUpReducer.signUpSuccess,
+    userExistErrorMessage: state.signUpReducer.userExistErrorMessage,
+    userExistError: state.signUpReducer.userExistError,
+    signUpLoading: state.signUpReducer.signUpLoading,
+  };
+};
+export default connect(mapStateToProps, { signUpAction, userAlreadyExistAction})(Register);

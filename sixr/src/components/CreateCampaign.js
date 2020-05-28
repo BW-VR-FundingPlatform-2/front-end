@@ -44,7 +44,7 @@ export default function CreateCampaign() {
     const classes = useStyles();
 
     const [formState, setFormState] = useState({
-        id: '',
+
         name: '',
         email: '',
         projects: '',
@@ -69,7 +69,6 @@ export default function CreateCampaign() {
         .then(res => console.log(res))
 
         setFormState({
-            id: '',
             name: '',
             email: '',
             projects: '',
