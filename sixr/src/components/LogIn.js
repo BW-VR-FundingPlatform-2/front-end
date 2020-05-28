@@ -58,9 +58,9 @@ const history = useHistory();
     Axios.post("https://vr-funding-platform.herokuapp.com/api/auth/login", formValues)
     .then(res => {
       localStorage.setItem("token",res.data.token);
-      history.push("/createcampange")
-      props.loginSucessAction()
-      props.logOutAction()
+      history.push("/createcampaign")
+      props.loginSucessAction(res.data.token)
+      // props.logOutAction()
     })
     .catch((err) => {
       props.loginActionFail()
