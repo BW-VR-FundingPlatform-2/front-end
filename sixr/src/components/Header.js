@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { AppBar, Toolbar, Tabs, Tab } from "@material-ui/core";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import sixr_logo from "../assets/sixr_logo.svg";

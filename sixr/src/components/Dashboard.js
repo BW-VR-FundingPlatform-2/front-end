@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 //Actions for redux
 import dashboardTitleAction from '../store/actions/dashboardTitleAction'
 import campaignFormTitleEditAction from '../store/actions/campaginFormTitleEditAction'
-import { Grid, Button, Typography, TextField, Paper } from "@material-ui/core";
+import { Grid, Button, Typography, TextField } from "@material-ui/core";
 // import { makeStyles } from "@material-ui/styles";
 //components
 import DashboardForm from "./DashboardForm";

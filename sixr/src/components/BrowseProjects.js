@@ -13,7 +13,7 @@ import { useStyles } from '../theme/componentStyles/browseProjectsStyles'
 // header image
 import browse_project_main_image from "../assets/browse_project_main_image.svg";
 
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const faces = [
   "http://i.pravatar.cc/300?img=1",

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 //connect function form redux
 import { connect } from "react-redux";
 //Link from react router
@@ -18,7 +18,7 @@ import {
 import { useStyles } from '../theme/componentStyles/loginStyles'
 
 //components
-import { LogIn_CampaignSuccess } from './LogIn_CampaignSuccess'
+import LogInCampaignSuccess from "./LogInCampaignSuccess"
 
 //Actions 
 import loginAction from "../store/actions/loginAction";
@@ -90,7 +90,7 @@ const history = useHistory();
         props.success 
         ? <>    
           {/* This will be a private route to our Dashboard  */}
-        <LogIn_CampaignSuccess />
+        <LogInCampaignSuccess />
       </>
         :
       <div style={{ padding: "15px", margin: "3em auto", maxWidth: "400px" }}>
