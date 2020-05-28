@@ -35,6 +35,7 @@ const SignUp = (props) => {
     password: "",
     email:"",
   });
+  
 
   console.log("%c SignUP", "color:red", formValues)
 

@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { AppBar, Toolbar, Tabs, Tab, Button } from "@material-ui/core";
+import { AppBar, Toolbar, Tabs, Tab } from "@material-ui/core";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import sixr_logo from "../assets/sixr_logo.svg";
 import { Link } from "react-router-dom";
 // import { useStyles } from '../theme/componentStyles/headerStyles'
 import { useStyles } from "../theme/componentStyles/headerStyles";
 import { connect } from "react-redux";
+//components
 import LogOut from "./LogOut";
+
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -82,7 +84,6 @@ function Header(props) {
               />
 
               {/* If there a token in local storage, the Sign Up tab will unmount */}
-              {localStorage.getItem("token") === true ? null : (
                 <Tab
                   className={header_Styles.tab}
                   label="Sign Up"
@@ -90,8 +91,9 @@ function Header(props) {
                   to="/signUp"
                   disableRipple
                 />
-              )}
 
+
+              {/* Just realized this is a security flaw, you can bypass the login by adding "token" to local storage.  If you refresh the page, you're logged in.  I'll have to save the token to state.  And render the component only if my token matches.  Accidentally hacked my own site.  */}
               {/* Checks local storage for a token, if it returns falsy/null the tab will not render, if true it will render */}
               {localStorage.getItem("token") && (
                 <Tab
@@ -104,16 +106,18 @@ function Header(props) {
               )}
 
               {/* This Is a Test Tab for Dashboard.  Will Be removed, and put on a private route */}
-              <Tab
-                className={header_Styles.tab}
-                label="Dashboard"
-                component={Link}
-                to="/dashboard"
-                disableRipple
-              />
+              {localStorage.getItem("token") && (
+                  <Tab
+                    className={header_Styles.tab}
+                    label="Dashboard"
+                    component={Link}
+                    to="/dashboard"
+                    disableRipple
+                  />
+              )}
 
-              {/* {localStorage.getItem("token") ? <LogOut /> : null} */}
-              <LogOut />
+              {localStorage.getItem("token") && <LogOut /> }
+              {/* <LogOut /> */}
             </Tabs>
           </Toolbar>
         </AppBar>

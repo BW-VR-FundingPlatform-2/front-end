@@ -14,19 +14,27 @@ const LogOut = (props) => {
   };
 
   return (
-    <>
-    {
-      props.loggedOut &&
-      <Button
-      style={{ height: "30px", marginLeft: "1em", marginTop: ".5em" }}
-      variant="contained"
-      color="primary"
-      onClick={handleClick}
-    >
-      Log Out
-    </Button>
-    }
-    </>
+    // <>
+    // {
+    //   props.loggedOut &&
+    //   <Button
+    //   style={{ height: "30px", marginLeft: "1em", marginTop: ".5em" }}
+    //   variant="contained"
+    //   color="primary"
+    //   onClick={handleClick}
+    // >
+    //   Log Out
+    // </Button>
+    // }
+    // </>
+    <Button
+    style={{ height: "30px", marginLeft: "1em", marginTop: ".5em" }}
+    variant="contained"
+    color="primary"
+    onClick={handleClick}
+  >
+    Log Out
+  </Button>
   );
 };
 
