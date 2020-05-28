@@ -66,10 +66,7 @@ export default function CreateCampaign() {
         event.preventDefault()
 
         axios.post('https://reqres.in/api/users', formState)
-        .then(res =>{
-            setProject([...project, res.data])
-            console.log(res.data)
-        })
+        .then(res => console.log(res))
 
         setFormState({
             id: '',

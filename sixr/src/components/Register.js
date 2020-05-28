@@ -49,7 +49,6 @@ export default function Register() {
   const classes = useStyles();
   //initial state of the form
   const [formState, setFormState] = useState({
-    id: '',
     username: '',
     password: '',
     email: ''
@@ -109,15 +108,11 @@ export default function Register() {
   const Submit = event => {
     event.preventDefault()
 
-    axios.post('https://vr-funding-platform.herokuapp.com/api/auth/register', formState)
-      .then(res => {
-        setUsers([...users, res.data])
-        console.log(res.data)
-      })
+    axios.post("https://vr-funding-platform.herokuapp.com/api/auth/register", formState)
+    .then(res => console.log(res))
 
 
     setFormState({
-      id: '',
       username: '',
       password: '',
       email: ''
