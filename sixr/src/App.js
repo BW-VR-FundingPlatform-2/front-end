@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import HomePage from './components/HomePage'
-import CreateCampaign from './components/CreateCampaign'
+import CreateCampange from './components/CreateCampaign'
 import BrowseProjects from './components/BrowseProjects';
 import AboutUs from './components/AboutUs';
 import LogIn from './components/LogIn';
@@ -24,7 +24,7 @@ function App() {
       <Route exact path="/about" component={AboutUs} />
       <Route exact path="/login" component={LogIn} />
       <Route exact path="/signup" component={SignUp} />
-      <PrivateRoute exact path="/createcampaign" component={CreateCampaign}/>
+      <PrivateRoute exact path="/createcampange" component={CreateCampange}/>
       <PrivateRoute exact path="/dashboard" component={Dashboard} />
       <Footer />
     </div>
