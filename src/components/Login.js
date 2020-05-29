@@ -55,7 +55,7 @@ const logSchema = yup.object().shape({
 })
 
 
-const LogIn = (props) => {
+const Login = (props) => {
     const classes = useStyles();
 
     const [formState, setFormState] = useState({
@@ -213,5 +213,5 @@ const mapStateToProps = (state) => {
     };
   };
   
-  export default connect(mapStateToProps, { loginAction, loginActionFail, loginSucessAction, logOutAction  })(LogIn);
+  export default connect(mapStateToProps, { loginAction, loginActionFail, loginSucessAction, logOutAction  })(Login);
   

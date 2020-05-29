@@ -88,7 +88,7 @@ const BrowseProjects = () => {
               </Typography>
               <Divider className={classes.divider} light />
               {faces.map((face) => (
-                <Avatar className={classes.avatar} key={face} src={face} />
+                <Avatar className={classes.avatar} key={face} src={face} style={{margin: 'auto'}} />
               ))}
             </CardContent>
           </Card>

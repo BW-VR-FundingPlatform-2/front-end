@@ -14,8 +14,8 @@ import { KeyboardDatePicker } from '@material-ui/pickers';
 import Axios from "axios";
 
 const DashboardForm = (props) => {
-  const [ selectedDate, setSelectedDate ] = useState(new Date())
-  
+  const [selectedDate, setSelectedDate] = useState(new Date())
+
   const [formData, setFormData] = useState({
     pledgeAmount: "",
     discount: "",
@@ -42,11 +42,11 @@ const DashboardForm = (props) => {
     props.dashboardFormAction(formData)
 
     Axios.get('https://reqres.in/api/users')
-    .then(res =>{
+      .then(res => {
         setFormData(res.formData)
         console.log(res.formData)
-    })
-}
+      })
+  }
 
   return (
     <>
@@ -127,4 +127,4 @@ const DashboardForm = (props) => {
   );
 };
 
-export default connect(null,  {dashboardFormAction})(DashboardForm);
+export default connect(null, { dashboardFormAction })(DashboardForm);
