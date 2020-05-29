@@ -23,7 +23,7 @@ import LogInCampaignSuccess from "./LogInCampaignSuccess"
 //Actions 
 import loginAction from "../store/actions/loginAction";
 import loginActionFail from '../store/actions/loginActionFail'
-import loginSucessAction from '../store/actions/loginSucessAction'
+import loginSuccessAction from '../store/actions/loginSucessAction'
 import logOutAction from '../store/actions/logOutAction'
 import Axios from "axios";
 
@@ -58,8 +58,8 @@ const history = useHistory();
     Axios.post("https://vr-funding-platform.herokuapp.com/api/auth/login", formValues)
     .then(res => {
       localStorage.setItem("token",res.data.token);
+      props.loginSuccessAction(res.data.token)
       history.push("/createcampaign")
-      props.loginSucessAction(res.data.token)
       // props.logOutAction()
     })
     .catch((err) => {
@@ -189,7 +189,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { loginAction, loginActionFail, loginSucessAction, logOutAction  })(LogIn);
+export default connect(mapStateToProps, { loginAction, loginActionFail, loginSuccessAction, logOutAction  })(LogIn);
 
 // component={Link}
 // to="createcampange"
