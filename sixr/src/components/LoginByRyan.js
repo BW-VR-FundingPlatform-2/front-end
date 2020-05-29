@@ -9,7 +9,7 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 // import { makeStyles } from "@material-ui/core/styles";
-import { Paper } from "@material-ui/core";
+import { Paper, FormHelperText } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import * as yup from "yup";
@@ -138,7 +138,7 @@ const Login = (props) => {
 
   return (
     <>
-      <Grid item >
+      <Grid item>
         <Grid
           container
           alignItems="center"
@@ -154,11 +154,26 @@ const Login = (props) => {
         <div>
           <Avatar
             className={classes.avatar}
-            style={{ margin: " 1em auto" }}
+            style={{ margin: " 2em auto" }}
             src="/broken-image.jpg"
           ></Avatar>
-          <Typography color="secondary" variant="h4" >Log In</Typography>
+
           <Paper>
+          <Grid
+              container
+              alignItems="flex-start"
+              justify="center"
+              spacing={2}
+            >
+              <Typography
+                variant="h4"
+                align="center"
+                gutterBottom
+                color="secondary"
+              >
+                Log In!
+                {props.error && <FormHelperText style={{color:"red"}}>{props.errorMessage}</FormHelperText>}
+              </Typography>
             <form
               noValidate
               onSubmit={Submit}
@@ -225,7 +240,9 @@ const Login = (props) => {
                 </Grid>
               </Grid>
             </form>
+          </Grid>
           </Paper>
+          
         </div>
         <Box mt={8}></Box>
       </Container>
