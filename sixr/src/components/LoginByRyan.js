@@ -123,9 +123,9 @@ const Login = (props) => {
     )
       .then((res) => {
         localStorage.setItem("token", res.data.token);
-        history.push("/");
-        props.loginSucessAction();
-        props.logOutAction();
+        props.loginSucessAction(res.data.token);
+        history.push("/createcampaign");
+
       })
       .catch((err) => {
         props.loginActionFail();
