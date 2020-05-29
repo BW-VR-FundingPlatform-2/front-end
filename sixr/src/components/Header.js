@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Tabs, Tab } from "@material-ui/core";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import sixr_logo from "../assets/sixr_logo.svg";
 import { Link } from "react-router-dom";
+
 // import { useStyles } from '../theme/componentStyles/headerStyles'
 import { useStyles } from "../theme/componentStyles/headerStyles";
 import { connect } from "react-redux";
@@ -24,24 +25,6 @@ function ElevationScroll(props) {
 
 function Header(props) {
   const header_Styles = useStyles();
-
-  // const [value, setValue] = useState(0);
-
-  // useEffect(() => {
-  //   if (window.location.pathname === "/" && value !== 0) {
-  //     setValue(0);
-  //   } else if (window.location.pathname === "/createcampaign" && value !== 1) {
-  //     setValue(1);
-  //   } else if (window.location.pathname === "/browseprojects" && value !== 2) {
-  //     setValue(2);
-  //   } else if (window.location.pathname === "/about" && value !== 3) {
-  //     setValue(3);
-  //   } else if (window.location.pathname === "/signUp" && value !== 4) {
-  //     setValue(4);
-  //   } else if (window.location.pathname === "/dashboard" && value !== 5) {
-  //     setValue(5);
-  //   }
-  // }, [value]);
 
   return (
     <>
@@ -73,6 +56,7 @@ function Header(props) {
                 component={Link}
                 to="/browseprojects"
                 disableRipple
+
               />
               <Tab
                 className={header_Styles.tab}
