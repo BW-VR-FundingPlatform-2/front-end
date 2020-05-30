@@ -11,9 +11,12 @@ import {
 } from "@material-ui/core";
 
 const RewardCards = (props) => {
+  const [item] = props
+  // console.log("props.dashboardFormReducer", item, typeof(item))
   const classes = useStyles();
   // const bull = <span className={classes.bullet}>•</span>;
   return (
+
     <Grid container style={{ margin: "2em 2em" }}>
       <Grid item xs={2}>
         <Card className={classes.root}>

@@ -1,10 +1,3 @@
-// const initialState = [{
-//     pledgeAmount:"",
-//     discount:"",
-//     deliveryDate:"",
-//     projectDescription:"",
-// }]
-
 const initialState = []
 
 const dashboardFormReducer = ( state = initialState, action ) => {
