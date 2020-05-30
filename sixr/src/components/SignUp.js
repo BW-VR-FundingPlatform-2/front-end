@@ -19,13 +19,13 @@ import { useStyles } from '../theme/componentStyles/loginStyles'
 
 //components
 // import { LogIn_CampaignSuccess } from './LogIn_CampaignSuccess'
-import LogIn from '../components/LogIn'
+// import Login from '../components/Login'
 
 //Actions 
 import signUpAction from '../store/actions/signUpAction'
 import userAlreadyExistAction from '../store/actions/userAlreadyExistAction'
 import Axios from "axios";
-import LoginByRyan from "./LoginByRyan";
+import LoginByRyan from './LoginByRyan'
 
 const SignUp = (props) => {
   //Allows to uses the styling from component styles directory
