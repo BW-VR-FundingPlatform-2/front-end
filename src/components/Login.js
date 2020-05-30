@@ -1,22 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { Link } from "react-router-dom"
 import * as yup from 'yup'
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom"
+import { Link as RouterLink } from "react-router-dom";
+
+import {
+    Typography,
+    Paper,
+    TextField,
+    Link,
+    Grid,
+    Button,
+    CircularProgress,
+    FormHelperText,
+} from "@material-ui/core";
+import { useStyles } from '../theme/componentStyles/loginStyles'
 
 //components
-import { LogIn_CampaignSuccess } from './LogIn_CampaignSuccess'
+import { LogInCampaignSuccess } from './LogInCampaignSuccess'
 
 //Actions 
 import loginAction from "../store/actions/loginAction";
@@ -26,32 +34,32 @@ import logOutAction from '../store/actions/logOutAction'
 import Axios from "axios";
 
 
-const useStyles = makeStyles((theme) => ({
-    paper: {
-        marginTop: theme.spacing(8),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
-    },
-    submit: {
-        margin: theme.spacing(3, 0, 2),
-    },
-}));
+// const useStyles = makeStyles((theme) => ({
+//     paper: {
+//         marginTop: theme.spacing(8),
+//         display: 'flex',
+//         flexDirection: 'column',
+//         alignItems: 'center',
+//     },
+//     avatar: {
+//         margin: theme.spacing(1),
+//         backgroundColor: theme.palette.secondary.main,
+//     },
+//     form: {
+//         width: '100%', // Fix IE 11 issue.
+//         marginTop: theme.spacing(1),
+//     },
+//     submit: {
+//         margin: theme.spacing(3, 0, 2),
+//     },
+// }));
 
 const logSchema = yup.object().shape({
     username: yup.string().required("you need to input your name"),
     password: yup
         .string()
         .required("Password is required")
-        
+
 })
 
 
@@ -115,103 +123,141 @@ const Login = (props) => {
         props.loginAction()
 
         Axios.post("https://vr-funding-platform.herokuapp.com/api/auth/login", formState)
-        .then(res => {
-          localStorage.setItem("token",res.data.token);
-          history.push("/")
-          props.loginSucessAction()
-          props.logOutAction()
-        })
-        .catch((err) => {
-          props.loginActionFail()
-          setFormState({
-            username: "",
-            password: "",
-          })
-        })
-      }
+            .then(res => {
+                localStorage.setItem("token", res.data.token);
+                history.push("/")
+                props.loginSucessAction()
+                props.logOutAction()
+            })
+            .catch((err) => {
+                props.loginActionFail()
+                setFormState({
+                    username: "",
+                    password: "",
+                })
+            })
+    }
 
     return (
-        <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <div className={classes.paper}>
-                <Avatar className={classes.avatar} src="/broken-image.jpg">
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Login
-        </Typography>
-                <form className={classes.form} noValidate onSubmit={Submit}>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        label="User Name"
-                        name="username"
-                        autoComplete="username"
-                        autoFocus
-                        value={formState.username}
-                        onChange={changeHandler}
-                    />
-                    {errorState.username.length > 0 ? (
-                        <p className="errors">{errorState.username}</p>
-                    ) : null}
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        autoComplete="current-password"
-                        value={formState.password}
-                        onChange={changeHandler}
-                    />
-                    {errorState.password.length > 0 ? (
-                        <p className="errors">{errorState.password}</p>
-                    ) : null}
-                    <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
-                    />
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        disabled={disabled}
-                        className={classes.submit}
-                    >
-                        Login
+        <>
+            <Grid item style={{ margin: "auto" }}>
+                <Grid
+                    container
+                    alignItems="center"
+                    justify="center"
+                    style={{ height: "30em" }}
+                >
+                    {/* This is the image  */}
+                    <div className={classes.mainImage} />
+                </Grid>
+            </Grid>
+            {
+                props.success
+                    ? <>
+                        {/* This will be a private route to our Dashboard  */}
+                        <LogInCampaignSuccess />
+                    </>
+                    :
+                    <div style={{ padding: "15px", margin: "3em auto", maxWidth: "400px" }}>
+                        <Avatar className={classes.avatar} src="/broken-image.jpg" style={{ margin: "2em auto" }}>
+                        </Avatar>
+                        <form className={classes.form} noValidate onSubmit={Submit}>
+                            <Paper style={{ padding: "15px" }}>
+                                <Grid
+                                    container
+                                    alignItems="flex-start"
+                                    justify="center"
+                                    spacing={2}
+                                >
+                                    <Typography
+                                        variant="h4"
+                                        align="center"
+                                        gutterBottom
+                                        color="primary"
+                                    >
+                                        Log In!
+                {props.error && <FormHelperText style={{ color: "red" }}>{props.errorMessage}</FormHelperText>}
+                                    </Typography>
+                                    <Grid item xs={12}>
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        label="User Name"
+                                        name="username"
+                                        type="test"
+                                        value={formState.username}
+                                        onChange={changeHandler}
+                                    />
+                                    {errorState.username.length > 0 ? (
+                                        <p style={{ color: "red" }}>{errorState.username}</p>
+                                    ) : null}
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        name="password"
+                                        label="Password"
+                                        type="password"
+                                        autoComplete="current-password"
+                                        value={formState.password}
+                                        onChange={changeHandler}
+
+                                    />
+                                    {errorState.password.length > 0 ? (
+                                        <p style={{ color: "red" }}>{errorState.password}</p>
+                                    ) : null}
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                    <FormControlLabel
+                                        control={<Checkbox value="remember" color="primary" />}
+                                        label="Remember me"
+                                    />
+                                    </Grid>
+                                    <Button
+                                        type="submit"
+                                        fullWidth
+                                        variant="contained"
+                                        color="primary"
+                                        disabled={disabled}
+                                        className={classes.submit}
+                                        
+                                    >
+                                        Login
           </Button>
-                    <Grid container>
-                        <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Forgot password?
-              </Link>
-                        </Grid>
-                        <Grid item>
-                            <Link to='/Register' variant="body2">
-                                {"Don't have an account? Sign Up"}
-                            </Link>
-                        </Grid>
-                    </Grid>
-                </form>
-            </div>
-            <Box mt={8}>
-            </Box>
-        </Container>
+                                    <Grid container>
+                                        <Grid item xs>
+
+                                        </Grid>
+                                        <Grid item >
+                                            <Typography style={{margin: '1em'}}>
+                                                Don't have an account?
+                            <Link color="primary"
+                                                    component={RouterLink} to='/register' >
+                                                    {" Sign Up"}
+                                                </Link>
+                                            </Typography>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Paper>
+                        </form>
+                    </div>
+            }
+        </>            
     );
 };
 
 const mapStateToProps = (state) => {
     return {
-      isLoading: state.loginReducer.isLoading,
-      errorMessage: state.loginReducer.errorMessage,
-      error:state.loginReducer.error,
-      success:state.loginReducer.success,
+                isLoading: state.loginReducer.isLoading,
+        errorMessage: state.loginReducer.errorMessage,
+        error: state.loginReducer.error,
+        success: state.loginReducer.success,
     };
-  };
-  
-  export default connect(mapStateToProps, { loginAction, loginActionFail, loginSucessAction, logOutAction  })(Login);
-  
+};
+
+export default connect(mapStateToProps, { loginAction, loginActionFail, loginSucessAction, logOutAction})(Login);
+

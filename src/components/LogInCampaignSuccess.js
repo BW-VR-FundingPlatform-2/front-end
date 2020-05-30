@@ -2,7 +2,7 @@ import React from 'react'
 import { Typography, Link } from '@material-ui/core'
 import { useHistory } from "react-router-dom"
 
-export const LogIn_CampaignSuccess = () => {
+export const LogInCampaignSuccess = () => {
     const history = useHistory()
     return (
         <Typography
