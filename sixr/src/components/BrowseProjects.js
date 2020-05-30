@@ -37,7 +37,6 @@ const BrowseProjects = () => {
   useEffect(() => {
     Axios.get("https://vr-funding-platform.herokuapp.com/api/users/projects")
       .then((res) => {
-        console.log(res.data);
         setProjectData(res.data);
         setLoading(true)
       })
@@ -88,7 +87,7 @@ const BrowseProjects = () => {
         {loading && projectData.map((data) => {
               return (
                 <>
-                  <Grid item xs={3}>
+                  <Grid item xs={3} style={{padding:"10px"}} key={Math.random()}>
                     <Card className={classes.card}>
                       <CardMedia
                         className={classes.media}
