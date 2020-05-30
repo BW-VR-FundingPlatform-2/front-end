@@ -54,7 +54,7 @@ const logSchema = yup.object().shape({
   password: yup.string().required("Password is required"),
 });
 
-const Login = (props) => {
+const LoginByRyan = (props) => {
   const classes = useStyles();
 
   const [formState, setFormState] = useState({
@@ -124,7 +124,7 @@ const Login = (props) => {
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         props.loginSucessAction(res.data.token);
-        history.push("/createcampaign");
+        history.push("/createcampaignbyryan");
 
       })
       .catch((err) => {
@@ -264,4 +264,4 @@ export default connect(mapStateToProps, {
   loginActionFail,
   loginSucessAction,
   logOutAction,
-})(Login);
+})(LoginByRyan);

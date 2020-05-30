@@ -13,7 +13,7 @@ import LogIn from './components/LogIn';
 import Dashboard from './components/Dashboard'
 import SignUp from './components/SignUp'
 import LoginByRyan from './components/LoginByRyan'
-import CreateCampaignByRyan from './components/CreateCampainByRyan'
+import CreateCampaignByRyan from './components/CreateCampaignByRyan'
 //privateRoute
 import PrivateRoute from './utils/PrivateRoute'
 
@@ -26,7 +26,7 @@ function App() {
       <Route exact path="/browseprojects" component={BrowseProjects} />
       <Route exact path="/about" component={AboutUs} />
       {/* <Route exact path="/login" component={LogIn} /> */}
-      <Route exact path="/login" component={LoginByRyan} />
+      <Route exact path="/loginbyryan" component={LoginByRyan} />
       <Route exact path="/signup" component={SignUp} />
       {/* <PrivateRoute exact path="/createcampaign" component={CreateCampaign}/> */}
       <PrivateRoute exact path="/createcampaignbyryan" component={CreateCampaignByRyan} />
