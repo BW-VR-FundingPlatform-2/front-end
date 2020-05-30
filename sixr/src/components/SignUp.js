@@ -25,6 +25,7 @@ import LogIn from '../components/LogIn'
 import signUpAction from '../store/actions/signUpAction'
 import userAlreadyExistAction from '../store/actions/userAlreadyExistAction'
 import Axios from "axios";
+import LoginByRyan from "./LoginByRyan";
 
 const SignUp = (props) => {
   //Allows to uses the styling from component styles directory
@@ -60,7 +61,7 @@ const history = useHistory();
     .then(res => console.log(res))
     .then(() => {
         props.signUpAction()
-        history.push('./login')
+        history.push('./loginbyryan')
         setFormValues({
             username: "",
             password: "",
@@ -96,7 +97,7 @@ const history = useHistory();
       {
         props.signUpSuccess
         ? <>      
-        <LogIn />
+        <LoginByRyan />
       </>
         :
       <div style={{ padding: "15px", margin: "3em auto", maxWidth: "400px" }}>
@@ -182,7 +183,7 @@ const history = useHistory();
                   <Link
                     color="secondary"
                     component={RouterLink}
-                    to="login"
+                    to="loginbyryan"
                   >
                     {" "}
                     Click Here{" "}
