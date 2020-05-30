@@ -63,7 +63,7 @@ const CreateCampaign = (props) => {
         donation: ''
     })
 
-    const [project, setProject] = useState([])
+    
 
 
     const changeHandler = event => {
