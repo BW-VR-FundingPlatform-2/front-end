@@ -17,13 +17,11 @@ const AboutUs = (props) => {
         >
           <Grid container direction="column" style={{ textAlign: "center" }}>
             <Grid item>
-              <Typography variant="h3">Sixr</Typography>
+              <Typography variant="h3">ACTS</Typography>
             </Grid>
             <Grid item>
               <Typography variant="body1" className={classes.mainCardFont}>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the.
+                Acts Retreat
               </Typography>
             </Grid>
             {props.success ? (

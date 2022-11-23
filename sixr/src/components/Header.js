@@ -1,7 +1,9 @@
 import React from "react";
+import {setValue, onChange} from "react";
 import { AppBar, Toolbar, Tabs, Tab } from "@material-ui/core";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import sixr_logo from "../assets/sixr_logo.svg";
+import Cross from "../assets/Cross.png"
 import { Link } from "react-router-dom";
 
 // import { useStyles } from '../theme/componentStyles/headerStyles'
@@ -32,30 +34,32 @@ function Header(props) {
         <AppBar position="sticky" color="inherit">
           <Toolbar>
             <img
-              className={header_Styles.sixr_logo}
-              src={sixr_logo}
+              
+              className={header_Styles.Cross}
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Cross-Jerusalem-Potent-Heraldry.svg/80px-Cross-Jerusalem-Potent-Heraldry.svg.png"
               alt="Site sixr_logo"
             />
             <Tabs
+              
               className={header_Styles.tabContainer}
-              value={0}
+              // value={0}
               // onChange={(event, value) => {
               //   setValue(value);
               // }}
+              
+            
             >
               <Tab
                 className={header_Styles.tab}
                 label="Home"
                 component={Link}
                 to="/"
-                disableRipple
               />
               <Tab
                 className={header_Styles.tab}
                 label="Browse Projects"
                 component={Link}
                 to="/browseprojects"
-                disableRipple
 
               />
               <Tab
@@ -63,7 +67,6 @@ function Header(props) {
                 label="About Us"
                 component={Link}
                 to="/about"
-                disableRipple
               />
 
               {props.success === false ? (
@@ -72,7 +75,6 @@ function Header(props) {
                   label="Sign Up"
                   component={Link}
                   to="/signUp"
-                  disableRipple
                 />
               ) : null}
 
@@ -94,7 +96,6 @@ function Header(props) {
                   label="Create A Campaign"
                   component={Link}
                   to="/createcampaignbyryan"
-                  disableRipple
                 />
               )}
 
@@ -105,7 +106,6 @@ function Header(props) {
                   label="Dashboard"
                   component={Link}
                   to="/dashboard"
-                  disableRipple
                 />
               )}
 

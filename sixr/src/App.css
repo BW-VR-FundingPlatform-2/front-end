@@ -11,6 +11,7 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+
 }
 
 .App-header {
@@ -25,7 +26,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #61fb8f;
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +36,5 @@
   to {
     transform: rotate(360deg);
   }
+  
 }
